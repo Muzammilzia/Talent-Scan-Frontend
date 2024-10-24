@@ -1,0 +1,18 @@
+version: 1.1
+pr_review:
+  auto_review_enabled: true
+  auto_summarize_pr: true
+  rules:
+    # Control what gets flagged during PR review with custom rules. Here are some to get you started:
+    - "Code should be DRY (Don't Repeat Yourself)"
+    - "There should no secrets or credentials in the code"
+    - "Extremely Complicated Code Needs Comments"
+    - "Use Descriptive Variable and Constant Names"
+    - "Error Handling Must Be Implemented for Services"
+    - "Don't Log Sensitive Data"
+    - "Follow the Single Responsibility Principle"
+    - "Function and Method Naming Should Follow Consistent Patterns"
+  # # Uncomment this section to provide custom behavior for one or more users.
+  # user_overrides:
+  #   - usernames: ["m-ata"]
+  #     auto_review_enabled: false # Example: @m-ata does not want their PR to be automatically reviewed.
