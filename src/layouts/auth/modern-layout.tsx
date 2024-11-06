@@ -83,7 +83,7 @@ export const Layout: FC<LayoutProps> = (props) => {
               },
             }}
           >
-            Operating <span>PRO</span>
+            Talent <span>Scan</span>
           </Box>
         </Box>
         <Box maxWidth="md">

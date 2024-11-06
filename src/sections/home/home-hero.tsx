@@ -39,7 +39,7 @@ export const HomeHero: FC = () => {
             >
               Talent Discovery
             </Typography>
-            , while you focus on building a strong team.
+            , while you focus on building a strong team
           </Typography>
           <Typography
             color="text.secondary"

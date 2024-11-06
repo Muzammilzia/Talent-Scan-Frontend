@@ -30,10 +30,6 @@ interface Item {
 
 const items: Item[] = [
   {
-    title: 'Pricing',
-    path: paths.pricing
-  },
-  {
     title: 'Contact',
     path: paths.contact
   },
@@ -145,7 +141,7 @@ export const TopNav: FC<TopNavProps> = (props) => {
                     }
                   }}
                 >
-                  Operating <span>PRO</span>
+                  Talent <span>Scan</span>
                 </Box>
               )}
             </Stack>
