@@ -21,38 +21,31 @@ interface Feature {
 const features: Feature[] = [
   {
     id: 'experts',
-    title: 'Built by experts',
-    description: 'All of the code follows MUI best practices, it’s written by our in-house team of experts.',
+    title: 'Designed by Talent Experts',
+    description: 'Our talent scan system is crafted by a team with deep recruitment expertise, ensuring best practices are followed at every step.',
     imageDark: '/assets/home-features-experts-dark.png',
     imageLight: '/assets/home-features-experts-light.png'
   },
   {
-    id: 'figma',
-    title: 'Design Files',
-    description: 'We\'ve included the source Figma files to Plus & Extended licenses so you can get creative! Build layouts with confidence.',
-    imageDark: '/assets/home-features-figma-dark.png',
-    imageLight: '/assets/home-features-figma-light.png'
+    id: 'tech',
+    title: 'Powered by Advanced AI',
+    description: 'Our system uses state-of-the-art NLP and AI algorithms to scan, analyze, and rank candidates effectively, helping you identify top talent.',
+    imageDark: '/assets/home-features-tech-dark.png',
+    imageLight: '/assets/home-features-tech-light.png'
   },
   {
-    id: 'tech',
-    title: 'Built with modern technologies',
-    description: 'Each template is a well-structured CRA & Next.js project, giving you a codebase that’s productive and enjoyable to work in.',
+    id: 'insights',
+    title: 'Actionable Insights',
+    description: 'Gain valuable insights into candidate strengths and match potential with data-driven analysis to help you make informed hiring decisions.',
     imageDark: '/assets/home-features-tech-dark.png',
     imageLight: '/assets/home-features-tech-light.png'
   },
   {
     id: 'customize',
-    title: 'Easy to customize',
-    description: 'Everything is styled using global theme overrides, just open the theme file in your editor and change whatever you want.',
+    title: 'Tailored for Your Needs',
+    description: 'Easily customize our talent scan solution to align with your unique hiring criteria and organizational requirements.',
     imageDark: '/assets/home-features-customize-dark.png',
     imageLight: '/assets/home-features-customize-light.png'
-  },
-  {
-    id: 'productive',
-    title: 'Built with CRA & Next.js',
-    description: 'Well-structured, thoughtfully componentized CRA & Next.js project, giving you a codebase that’s productive and enjoyable to work in.',
-    imageDark: '/assets/home-features-nextjs-dark.png',
-    imageLight: '/assets/home-features-nextjs-light.png'
   }
 ];
 

@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
-import { App } from 'src/app';
+import { App } from 'src/App';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 

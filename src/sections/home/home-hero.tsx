@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import EyeIcon from '@untitled-ui/icons-react/build/esm/Eye';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
@@ -32,15 +31,15 @@ export const HomeHero: FC = () => {
             variant="h1"
             sx={{ mb: 2 }}
           >
-            Let us worry about the&nbsp;
+            Let us manage the&nbsp;
             <Typography
               component="span"
               color="primary.main"
               variant="inherit"
             >
-              Operations
+              Talent Discovery
             </Typography>
-            , you focus on Growth.
+            , while you focus on building a strong team
           </Typography>
           <Typography
             color="text.secondary"
@@ -49,7 +48,7 @@ export const HomeHero: FC = () => {
               fontWeight: 500
             }}
           >
-            Unlock your company's full potential and drive efficiency. Achieve best-practice like never before, empower your team , and focus on achieving your goals.
+            Unlock your company’s full potential by discovering top talent. Enhance efficiency, bring the right skills to your team, and focus on achieving your goals with precision. Let us empower your recruitment process and help you build a high performing workforce
           </Typography>
           <Stack
             alignItems="center"
@@ -83,34 +82,6 @@ export const HomeHero: FC = () => {
             direction="row"
             spacing={2}
           >
-            <Button
-              component={RouterLink}
-              href={paths.dashboard.index}
-              startIcon={(
-                <SvgIcon fontSize="small">
-                  <EyeIcon />
-                </SvgIcon>
-              )}
-              sx={(theme) => theme.palette.mode === 'dark'
-                ? {
-                  backgroundColor: 'neutral.50',
-                  color: 'neutral.900',
-                  '&:hover': {
-                    backgroundColor: 'neutral.200'
-                  }
-                }
-                : {
-                  backgroundColor: 'neutral.900',
-                  color: 'neutral.50',
-                  '&:hover': {
-                    backgroundColor: 'neutral.700'
-                  }
-                }
-              }
-              variant="contained"
-            >
-              Live Demo
-            </Button>
           </Stack>
         </Box>
         <Box

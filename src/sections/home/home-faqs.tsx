@@ -17,20 +17,20 @@ interface FaqType {
 
 const faqs: FaqType[] = [
   {
-    question: 'Can I try out the platform to see how it works?',
-    answer: 'Yes, we offer a 45 day free trial without a credit card needed.'
+    question: 'Can I try the talent scan platform before committing?',
+    answer: 'Yes, we offer a 45-day free trial, with no credit card required, so you can experience the platform’s features firsthand.'
   },
   {
-    question: 'How many companies can I use with each Operating PRO account?',
-    answer: 'For a Business PRO account a business group can have up to 5 entities, whereas an Enterprise PRO account can have up to 15 entities. But each entity must be part of the business group of related entities (through shared ownership or control).'
+    question: 'How many teams or departments can use each Talent PRO account?',
+    answer: 'For a Business PRO account, up to 5 teams within an organization can access the platform. With an Enterprise PRO account, up to 15 teams can utilize the service. Each team must belong to the same organization.'
   },
   {
-    question: 'Do you offer a monthly subscription?',
-    answer: 'No, we only offer annual subscriptions because we see the strategic value over the long term. We do however offer a 45 day free trial, without a credit card to try us out.'
+    question: 'Is there a monthly subscription option?',
+    answer: 'No, we only offer annual subscriptions to ensure a long-term strategic partnership. However, you can start with our 45-day free trial, no credit card needed.'
   },
   {
-    question: 'What countries do you support?',
-    answer: 'We support 190 countries. We unfortunately do not provide services to Cuba, Iran, North Korea, Sudan, or Syria.'
+    question: 'Which regions does the talent scan platform support?',
+    answer: 'We support 190 countries worldwide. However, services are not available in Cuba, Iran, North Korea, Sudan, or Syria.'
   }
 ];
 
