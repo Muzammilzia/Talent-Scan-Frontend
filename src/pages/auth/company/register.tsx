@@ -56,14 +56,14 @@ const validationSchema = Yup.object({
 const Page = () => {
   const router = useRouter();
   const isMounted = useMounted();
-  const {signUp} = useAuth<AuthContextType>();
+  const {signUpCompany} = useAuth<AuthContextType>();
 
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values, helpers) => {
       try {
-        await signUp(values.email, values.name, values.password); 
+        await signUpCompany(values.email, values.name, values.password); 
         if (isMounted()) {
           router.push('/auth/company/login'); // Redirect to login page
         }

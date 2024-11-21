@@ -106,6 +106,7 @@ export interface AuthContextType extends State {
   signUp: (email: string, name: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   signInCompany: (email: string, password: string) => Promise<void>;
+  signUpCompany: (email: string, password: string, name: string) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -115,6 +116,7 @@ export const AuthContext = createContext<AuthContextType>({
   signUp: () => Promise.resolve(),
   signOut: () => Promise.resolve(),
   signInCompany: () => Promise.resolve(),
+  signUpCompany: () => Promise.resolve(),
 });
 
 interface AuthProviderProps {
@@ -192,7 +194,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
     async (email: string, password: string): Promise<void> => {
       try {
         // Replace with your company-specific login API
-        const { accessToken } = await authApi.signIn({ email, password });
+        const { accessToken } = await authApi.signInCompany({ email, password });
         const user = await authApi.me({ accessToken });
   
         sessionStorage.setItem(STORAGE_KEY, accessToken);
@@ -229,6 +231,24 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
     [dispatch]
   );
 
+  const signUpCompany = useCallback(
+    async (email: string, name: string, password: string): Promise<void> => {
+      const { accessToken } = await authApi.signUpCompany({ email, name, password });
+      const user = await authApi.me({ accessToken });
+
+      sessionStorage.setItem(STORAGE_KEY, accessToken);
+
+      dispatch({
+        type: ActionType.SIGN_UP,
+        payload: {
+          user
+        }
+      });
+
+    },
+    [dispatch]
+  );
+
   const signOut = useCallback(
     async (): Promise<void> => {
       sessionStorage.removeItem(STORAGE_KEY);
@@ -245,7 +265,8 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
         signIn,
         signUp,
         signOut,
-        signInCompany
+        signInCompany,
+        signUpCompany
       }}
     >
       {children}
