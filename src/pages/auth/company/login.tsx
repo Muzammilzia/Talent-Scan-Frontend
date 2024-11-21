@@ -46,13 +46,13 @@ const Page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const returnTo = searchParams.get("returnTo");
-  const { signIn } = useAuth<AuthContextType>();
+  const { signInCompany} = useAuth<AuthContextType>();
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values, helpers): Promise<void> => {
       try {
-        await signIn(values.email, values.password);
+        await signInCompany(values.email, values.password);
 
         if (isMounted()) {
           router.push(returnTo || paths.dashboard.index);
@@ -94,7 +94,7 @@ const Page = () => {
           <Typography variant="h5">Log in</Typography>
           <Typography color="text.secondary" variant="body2">
             Don&apos;t have an account? &nbsp;
-            <Link href="#" underline="hover" variant="subtitle2">
+            <Link href="/auth/company/register" underline="hover" variant="subtitle2">
               Register
             </Link>
           </Typography>

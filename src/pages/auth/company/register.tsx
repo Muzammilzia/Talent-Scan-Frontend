@@ -10,8 +10,12 @@ import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { AuthContextType } from "src/contexts/auth/jwt-context";
+import { useAuth } from "src/hooks/use-auth";
 
 import { RouterLink } from 'src/components/router-link';
+import { useRouter } from 'src/hooks/use-router';
+import { useMounted } from 'src/hooks/use-mounted';
 import { Seo } from 'src/components/seo';
 import { paths } from 'src/paths';
 
@@ -50,10 +54,28 @@ const validationSchema = Yup.object({
 });
 
 const Page = () => {
+  const router = useRouter();
+  const isMounted = useMounted();
+  const {signUp} = useAuth<AuthContextType>();
+
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (): void => {}
+    onSubmit: async (values, helpers) => {
+      try {
+        await signUp(values.email, values.name, values.password); 
+        if (isMounted()) {
+          router.push('/auth/company/login'); // Redirect to login page
+        }
+      } catch (err) {
+        console.error(err);
+        if (isMounted()) {
+          helpers.setStatus({ success: false });
+          helpers.setErrors({ email: 'An error occurred during registration' });
+          helpers.setSubmitting(false);
+        }
+      }
+    }
   });
 
   return (
@@ -93,7 +115,7 @@ const Page = () => {
             Already have an account?
             &nbsp;
             <Link
-              href="#"
+              href="/auth/company/login"
               underline="hover"
               variant="subtitle2"
             >
