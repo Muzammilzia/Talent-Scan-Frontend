@@ -25,10 +25,6 @@ const sections: Section[] = [
     title: "Menu",
     items: [
       {
-        title: "Pricing",
-        path: "pricing",
-      },
-      {
         title: "Contact",
         path: "contact",
       },
@@ -132,11 +128,11 @@ export const Footer: FC = (props) => (
                   },
                 }}
               >
-                Operating <span>PRO</span>
+                Talent <span>Scan</span>
               </Box>
             </Stack>
             <Typography color="text.secondary" variant="caption">
-              © 2024 Operating PRO. All Rights Reserved
+              © 2024 Talent Scan. All Rights Reserved
             </Typography>
           </Stack>
         </Grid>

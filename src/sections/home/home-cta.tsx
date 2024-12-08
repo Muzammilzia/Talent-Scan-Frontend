@@ -30,7 +30,7 @@ export const HomeCta: FC = () => (
           color="inherit"
           variant="subtitle2"
         >
-          Not just a set of tools, Operating PRO provides the structure to achieve best practice in the most important parts of your business.
+          Talent Scan goes beyond conventional solutions; it offers a powerful framework that enables organizations to optimize their talent acquisition and development processes
         </Typography>
       </Stack>
       <Stack
