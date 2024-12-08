@@ -79,6 +79,25 @@ class AuthApi {
     });
   }
 
+  async signInCompany(request: SignInRequest): SignInResponse {
+    const { email, password } = request;
+
+    await wait(500);
+
+    return new Promise((resolve, reject) => {
+      try {
+        // this will come from API response
+        const accessToken =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11enphbW1pbEB0YWxlbnRzY2FuLmNvbSIsInBhc3N3b3JkIjoibXV6emFtbWlsQHRhbGVudCIsImlhdCI6MTcyOTY0OTQyMn0.AE8x9PgOwIPOgitdMQSjtAoDupMyJyO0bacrTgA7Jjo";
+
+        resolve({ accessToken });
+      } catch (err) {
+        console.error("[Auth Api]: ", err);
+        reject(new Error("Internal server error"));
+      }
+    });
+  }
+
   async signUp(request: SignUpRequest): SignUpResponse {
     const { email, name, password } = request;
 
@@ -98,7 +117,44 @@ class AuthApi {
     });
   }
 
+  async signUpCompany(request: SignUpRequest): SignUpResponse {
+    const { email, name, password } = request;
+
+    await wait(1000);
+
+    return new Promise((resolve, reject) => {
+      try {
+        // this will come from API response
+        const accessToken =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11enphbW1pbEB0YWxlbnRzY2FuLmNvbSIsInBhc3N3b3JkIjoibXV6emFtbWlsQHRhbGVudCIsImlhdCI6MTcyOTY0OTQyMn0.AE8x9PgOwIPOgitdMQSjtAoDupMyJyO0bacrTgA7Jjo";
+
+        resolve({ accessToken });
+      } catch (err) {
+        console.error("[Auth Api]: ", err);
+        reject(new Error("Internal server error"));
+      }
+    });
+  }
+
   me(request: MeRequest): MeResponse {
+    const { accessToken } = request;
+
+    return new Promise((resolve, reject) => {
+      try {
+        resolve({
+          id: "user_1",
+          avatar: 'https://picsum.photos/80',
+          email: 'muzzammil@talentscan.com',
+          name: 'muzzammil',
+          // plan: user.plan,
+        });
+      } catch (err) {
+        console.error("[Auth Api]: ", err);
+        reject(new Error("Internal server error"));
+      }
+    });
+  }
+  meCompany(request: MeRequest): MeResponse {
     const { accessToken } = request;
 
     return new Promise((resolve, reject) => {

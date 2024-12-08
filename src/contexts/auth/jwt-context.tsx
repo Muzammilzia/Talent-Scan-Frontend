@@ -105,6 +105,8 @@ export interface AuthContextType extends State {
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, name: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  signInCompany: (email: string, password: string) => Promise<void>;
+  signUpCompany: (email: string, password: string, name: string) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -112,7 +114,9 @@ export const AuthContext = createContext<AuthContextType>({
   issuer: Issuer.JWT,
   signIn: () => Promise.resolve(),
   signUp: () => Promise.resolve(),
-  signOut: () => Promise.resolve()
+  signOut: () => Promise.resolve(),
+  signInCompany: () => Promise.resolve(),
+  signUpCompany: () => Promise.resolve(),
 });
 
 interface AuthProviderProps {
@@ -186,6 +190,29 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
     [dispatch]
   );
 
+  const signInCompany = useCallback(
+    async (email: string, password: string): Promise<void> => {
+      try {
+        // Replace with your company-specific login API
+        const { accessToken } = await authApi.signInCompany({ email, password });
+        const user = await authApi.me({ accessToken });
+  
+        sessionStorage.setItem(STORAGE_KEY, accessToken);
+  
+        dispatch({
+          type: ActionType.SIGN_IN,
+          payload: {
+            user,
+          },
+        });
+      } catch (err) {
+        console.error("Company login failed", err);
+        throw new Error("Unable to sign in as a company.");
+      }
+    },
+    [dispatch]
+  );
+
   const signUp = useCallback(
     async (email: string, name: string, password: string): Promise<void> => {
       const { accessToken } = await authApi.signUp({ email, name, password });
@@ -199,6 +226,25 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
           user
         }
       });
+
+    },
+    [dispatch]
+  );
+
+  const signUpCompany = useCallback(
+    async (email: string, name: string, password: string): Promise<void> => {
+      const { accessToken } = await authApi.signUpCompany({ email, name, password });
+      const user = await authApi.me({ accessToken });
+
+      sessionStorage.setItem(STORAGE_KEY, accessToken);
+
+      dispatch({
+        type: ActionType.SIGN_UP,
+        payload: {
+          user
+        }
+      });
+
     },
     [dispatch]
   );
@@ -218,7 +264,9 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
         issuer: Issuer.JWT,
         signIn,
         signUp,
-        signOut
+        signOut,
+        signInCompany,
+        signUpCompany
       }}
     >
       {children}

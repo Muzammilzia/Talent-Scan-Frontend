@@ -1,3 +1,5 @@
+import { company } from "./api/jobs/data";
+
 export const paths = {
   index: "/",
   checkout: "/checkout",
@@ -11,6 +13,10 @@ export const paths = {
     candidate: {
       login: "/auth/candidate/login",
       register: "/auth/candidate/register",
+    },
+    company: {
+      login: "/auth/company/login",
+      register: "/auth/company/register",
     },
   },
   authDemo: {
