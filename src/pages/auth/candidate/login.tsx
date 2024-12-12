@@ -54,7 +54,7 @@ const Page = () => {
         await signIn(values.email, values.password);
 
         if (isMounted()) {
-          router.push(returnTo || paths.dashboard.index);
+          router.push(returnTo || paths.candidateDashboard.index);
         }
       } catch (err) {
         console.error(err);
@@ -76,7 +76,7 @@ const Page = () => {
           <Link
             color="text.primary"
             component={RouterLink}
-            href={paths.dashboard.index}
+            href={paths.candidateDashboard.index}
             sx={{
               alignItems: "center",
               display: "inline-flex",

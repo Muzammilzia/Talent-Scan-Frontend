@@ -96,6 +96,54 @@ export const paths = {
       feed: "/dashboard/social/feed",
     },
   },
+  candidateDashboard: { 
+    index: "/candidateDashboard",
+    academy: {
+      index: "/candidateDashboard/academy",
+      courseDetails: "/candidateDashboard/academy/courses/:courseId",
+    },
+    account: "/candidateDashboard/account",
+    analytics: "/candidateDashboard/analytics",
+    blank: "/candidateDashboard/blank",
+    blog: {
+      index: "/candidateDashboarddashboard/blog",
+      postDetails: "/candidateDashboard/blog/:postId",
+      postCreate: "/candidateDashboard/blog/create",
+    },
+    calendar: "/candidateDashboard/calendar",
+    chat: "/cndidateDashboard/chat",
+    crypto: "/candidateDashboard/crypto",
+    customers: {
+      index: "/candidateDashboard/customers",
+      details: "/candidateDashboard/customers/:customerId",
+      edit: "/candidateDashboard/customers/:customerId/edit",
+    },
+    ecommerce: "/candidateDashboard/ecommerce",
+    fileManager: "/candidateDashboard/file-manager",
+    invoices: {
+      index: "/candidateDashboard/invoices",
+      details: "/candidateDashboard/invoices/:orderId",
+    },
+    jobs: {
+      index: "/candidateDashboard/jobs",
+      create: "/candidateDashboard/jobs/create",
+      companies: {
+        details: "/candidateDashboard/jobs/companies/:companyId",
+      },
+    },
+    kanban: "/candidateDashboard/kanban",
+    logistics: {
+      index: "/candidateDashboard/logistics",
+      fleet: "/candidateDashboard/logistics/fleet",
+    },
+    mail: "/candidateDashboard/mail",
+    social: {
+      index: "/candidateDashboard/social",
+      profile: "/candidateDashboard/social/profile",
+      feed: "/candidateDashboard/social/feed",
+    },
+  },
+
   components: {
     index: "/components",
     dataDisplay: {
