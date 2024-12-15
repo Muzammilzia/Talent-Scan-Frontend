@@ -106,12 +106,12 @@ export const paths = {
     analytics: "/candidateDashboard/analytics",
     blank: "/candidateDashboard/blank",
     blog: {
-      index: "/candidateDashboarddashboard/blog",
+      index: "/candidateDashboard/blog",
       postDetails: "/candidateDashboard/blog/:postId",
       postCreate: "/candidateDashboard/blog/create",
     },
     calendar: "/candidateDashboard/calendar",
-    chat: "/cndidateDashboard/chat",
+    chat: "/candidateDashboard/chat",
     crypto: "/candidateDashboard/crypto",
     customers: {
       index: "/candidateDashboard/customers",

@@ -8,7 +8,6 @@ import Error404Page from "src/pages/404";
 import Error500Page from "src/pages/500";
 import ContactPage from "src/pages/contact";
 import CheckoutPage from "src/pages/checkout";
-import PricingPage from "src/pages/pricing";
 
 import { authRoutes } from "./auth";
 import { authDemoRoutes } from "./auth-demo";
@@ -17,6 +16,7 @@ import { dashboardRoutes } from "./dashboard";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Layout as AuthLayout} from "src/layouts/auth/modern-layout";
+import { candidateDashboardRoutes } from "./CandidateDashboard";
 
 const stripePromise = loadStripe(
   "pk_test_51O9CXAL9HBA3lYZUJjzrBw5oQ93bnnjJdZSnGpHsUzf5yHVurvZAT7XwlMebzAbDD7YWS1Hm9FNH4Q8fmS6JY3QT00GnkSbpGD"
@@ -43,16 +43,13 @@ export const routes: RouteObject[] = [
         index: true,
         element: <HomePage />,
       },
-      {
-        path: "pricing",
-        element: <PricingPage />,
-      },
       ...componentsRoutes,
     ],
   },
   ...authRoutes,
   ...authDemoRoutes,
   ...dashboardRoutes,
+  ...candidateDashboardRoutes,
   {
     path: "checkout",
     element: (
