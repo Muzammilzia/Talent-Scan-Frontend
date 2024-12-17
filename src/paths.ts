@@ -144,6 +144,48 @@ export const paths = {
     },
   },
 
+  companyDashboard: { 
+    index: "/companyDashboard",
+    academy: {
+      index: "/companyDashboard/academy",
+      courseDetails: "/companyDashboard/academy/courses/:courseId",
+    },
+    account: "/companyDashboard/account",
+    analytics: "/companyDashboard/analytics",
+    blank: "/companyDashboard/blank",
+    calendar: "/companyDashboard/calendar",
+    chat: "/companyDashboard/chat",
+    crypto: "/companyDashboard/crypto",
+    customers: {
+      index: "/companyDashboard/customers",
+      details: "/companyDashboard/customers/:customerId",
+      edit: "/companyDashboard/customers/:customerId/edit",
+    },
+    ecommerce: "/companyDashboard/ecommerce",
+    fileManager: "/companyDashboard/file-manager",
+    invoices: {
+      index: "/companyDashboard/invoices",
+      details: "/companyDashboard/invoices/:orderId",
+    },
+    jobs: {
+      index: "/companyDashboard/jobs",
+      create: "/companyDashboard/jobs/create",
+      companies: {
+        details: "/companyDashboard/jobs/companies/:companyId",
+      },
+    },
+    kanban: "/companyDashboard/kanban",
+    logistics: {
+      index: "/companyDashboard/logistics",
+    },
+    mail: "/companyDashboard/mail",
+    social: {
+      index: "/companyDashboard/social",
+      profile: "/companyDashboard/social/profile",
+      feed: "/companyDashboard/social/feed",
+    },
+  },
+
   components: {
     index: "/components",
     dataDisplay: {

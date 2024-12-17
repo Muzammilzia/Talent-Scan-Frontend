@@ -55,7 +55,7 @@ const Page = () => {
         await signInCompany(values.email, values.password);
 
         if (isMounted()) {
-          router.push(returnTo || paths.dashboard.index);
+          router.push(returnTo || paths.companyDashboard.index);
         }
       } catch (err) {
         console.error(err);
@@ -77,7 +77,7 @@ const Page = () => {
           <Link
             color="text.primary"
             component={RouterLink}
-            href={paths.dashboard.index}
+            href={paths.companyDashboard.index}
             sx={{
               alignItems: "center",
               display: "inline-flex",

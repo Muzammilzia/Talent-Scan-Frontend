@@ -17,6 +17,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Layout as AuthLayout} from "src/layouts/auth/modern-layout";
 import { candidateDashboardRoutes } from "./CandidateDashboard";
+import { companDashboardRoutes } from "./companyDashboard";
 
 const stripePromise = loadStripe(
   "pk_test_51O9CXAL9HBA3lYZUJjzrBw5oQ93bnnjJdZSnGpHsUzf5yHVurvZAT7XwlMebzAbDD7YWS1Hm9FNH4Q8fmS6JY3QT00GnkSbpGD"
@@ -50,6 +51,7 @@ export const routes: RouteObject[] = [
   ...authDemoRoutes,
   ...dashboardRoutes,
   ...candidateDashboardRoutes,
+  ...companDashboardRoutes,
   {
     path: "checkout",
     element: (
