@@ -14,6 +14,8 @@ import { authRoutes } from "./auth";
 import { authDemoRoutes } from "./auth-demo";
 import { componentsRoutes } from "./components";
 import { dashboardRoutes } from "./dashboard";
+import { candidateDashboardRoutes } from "./candidate-dashboard";
+import { companyDashboardRoutes } from "./company-dashboard";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Layout as AuthLayout} from "src/layouts/auth/modern-layout";
@@ -53,6 +55,8 @@ export const routes: RouteObject[] = [
   ...authRoutes,
   ...authDemoRoutes,
   ...dashboardRoutes,
+  ...candidateDashboardRoutes,
+  ...companyDashboardRoutes,
   {
     path: "checkout",
     element: (
