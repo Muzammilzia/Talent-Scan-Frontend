@@ -93,7 +93,7 @@ const Page = () => {
           <Typography variant="h5">Log in</Typography>
           <Typography color="text.secondary" variant="body2">
             Don&apos;t have an account? &nbsp;
-            <Link href="#" underline="hover" variant="subtitle2">
+            <Link component={RouterLink} href={paths.auth.candidate.register} underline="hover" variant="subtitle2">
               Register
             </Link>
           </Typography>
