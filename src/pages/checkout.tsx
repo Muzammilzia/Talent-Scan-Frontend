@@ -21,6 +21,7 @@ import { useLocation } from "react-router";
 import { toast } from "react-hot-toast";
 import { Billing } from "src/interfaces/checkout.interface";
 import {loadStripe} from '@stripe/stripe-js';
+import { paths } from "src/paths";
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
@@ -135,7 +136,7 @@ const Page = () => {
       window.localStorage.removeItem("temp_token");
       setTimeout(
         () =>
-          (window.location.href = process.env.REACT_APP_OPERATINGPRO_LOGIN_URL || "https://app.operatingpro.com/auth/login"),
+          (window.location.href = paths.auth.candidate.login),
         1000
       );
     } else {

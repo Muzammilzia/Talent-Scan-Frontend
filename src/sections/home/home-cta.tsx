@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { paths } from 'src/paths';
+import { RouterLink } from 'src/components/router-link';
 
 export const HomeCta: FC = () => (
   <Box
@@ -41,8 +43,8 @@ export const HomeCta: FC = () => (
         sx={{ mt: 3 }}
       >
         <Button
-          component="a"
-          href="https://app.operatingpro.com/auth/register-company"
+          component={RouterLink}
+          href={paths.auth.company.register}
           variant="contained"
         >
           Instant Access

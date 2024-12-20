@@ -30,11 +30,11 @@ interface Item {
 const items: Item[] = [
   {
     title: 'Sign up',
-    path: 'https://app.operatingpro.com/auth/register-company'
+    path: paths.auth.candidate.register
   },
   {
     title: 'Login',
-    path: 'https://app.operatingpro.com/auth/login'
+    path: paths.auth.candidate.login
   },
   {
     title: 'Pricing',
@@ -341,7 +341,7 @@ export const SideNav: FC<SideNavProps> = (props) => {
               }
             }}
           >
-            Operating <span>PRO</span>
+            Talent <span>Scan</span>
           </Box>
         </Stack>
       </Box>

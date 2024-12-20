@@ -36,17 +36,17 @@ const sections: Section[] = [
       {
         title: "Terms & Conditions",
         external: true,
-        path: "https://app.operatingpro.com/legal/terms",
+        path: "https://google.com",
       },
       {
         title: "Privacy Policy",
         external: true,
-        path: "https://app.operatingpro.com/legal/privacy",
+        path: "https://google.com",
       },
       {
         title: "Cookies Policy",
         external: true,
-        path: "https://app.operatingpro.com/legal/cookie-policy",
+        path: "https://google.com",
       },
     ],
   },
@@ -56,12 +56,12 @@ const sections: Section[] = [
       {
         title: "Twitter",
         external: true,
-        path: "https://www.twitter.com/operatingpro",
+        path: "https://google.com",
       },
       {
         title: "LinkedIn",
         external: true,
-        path: "https://www.linkedin.com/company/operatingpro",
+        path: "https://google.com",
       },
     ],
   },

@@ -61,7 +61,7 @@ const Page = () => {
                 sx={{ my: 2 }}
                 variant="body1"
               >
-                Join CEOs, COOs, and operations teams in using Operating PRO to power modern businesses.
+                Join CEOs, COOs, and operations teams in hiring top talent.
               </Typography>
               {/* <Stack
                 alignItems="center"

@@ -1,5 +1,5 @@
 FROM node:20.0.0
-WORKDIR /operatingpro/
+WORKDIR /
 COPY package*.json ./
 COPY tsconfig*.json ./
 COPY . ./

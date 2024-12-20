@@ -243,7 +243,7 @@ export const ContactForm: FC = () => {
         {' '}
         <Link
           color="text.primary"
-          href="https://app.operatingpro.com/legal/privacy"
+          href="https://google.com"
           underline="always"
           variant="subtitle2"
         >
@@ -254,7 +254,7 @@ export const ContactForm: FC = () => {
         {' '}
         <Link
           color="text.primary"
-          href="https://app.operatingpro.com/legal/cookie-policy"
+          href="https://google.com"
           underline="always"
           variant="subtitle2"
         >

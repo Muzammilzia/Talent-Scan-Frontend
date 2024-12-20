@@ -35,7 +35,7 @@ const items: Item[] = [
   },
   {
     title: 'Login',
-    path: 'https://app.operatingpro.com/auth/login',
+    path: paths.auth.candidate.login,
   }
 ];
 
@@ -200,9 +200,9 @@ export const TopNav: FC<TopNavProps> = (props) => {
             sx={{ flexGrow: 1 }}
           >
             <Button
-              component="a"
+              component={RouterLink}
               size={mdUp ? 'medium' : 'small'}
-              href="https://app.operatingpro.com/auth/register-company"
+              href={paths.auth.candidate.register}
               variant="contained"
             >
               Instant Access

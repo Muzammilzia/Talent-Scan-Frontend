@@ -25,7 +25,7 @@ const Page = () => {
 
   return (
     <>
-      <Seo title="Operating PRO Contact" />
+      <Seo title="Talent Scan Contact" />
       <Box
         component="main"
         sx={{
