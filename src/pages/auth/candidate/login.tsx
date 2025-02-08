@@ -19,6 +19,7 @@ import { useMounted } from "src/hooks/use-mounted";
 import { useRouter } from "src/hooks/use-router";
 import { useSearchParams } from "src/hooks/use-search-params";
 import { FormHelperText } from "@mui/material";
+import { useCandidateSignIn } from "src/hooks/auth/use-candidate-auth";
 
 interface Values {
   email: string;
@@ -45,17 +46,14 @@ const Page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const returnTo = searchParams.get("returnTo");
-  const { signIn } = useAuth<AuthContextType>();
+  // const { signIn } = useAuth<AuthContextType>();
+  const { mutate: signIn } = useCandidateSignIn();
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values, helpers): Promise<void> => {
       try {
-        await signIn(values.email, values.password);
-
-        if (isMounted()) {
-          router.push(returnTo || paths.dashboard.index);
-        }
+        signIn({ email: values.email, password: values.password });
       } catch (err) {
         console.error(err);
 
@@ -93,7 +91,12 @@ const Page = () => {
           <Typography variant="h5">Log in</Typography>
           <Typography color="text.secondary" variant="body2">
             Don&apos;t have an account? &nbsp;
-            <Link component={RouterLink} href={paths.auth.candidate.register} underline="hover" variant="subtitle2">
+            <Link
+              component={RouterLink}
+              href={paths.auth.candidate.register}
+              underline="hover"
+              variant="subtitle2"
+            >
               Register
             </Link>
           </Typography>
@@ -138,11 +141,11 @@ const Page = () => {
           >
             Continue
           </Button>
-          <Box sx={{ mt: 3 }}>
+          {/* <Box sx={{ mt: 3 }}>
             <Link href="#" underline="hover" variant="subtitle2">
               Forgot password?
             </Link>
-          </Box>
+          </Box> */}
         </form>
       </div>
     </>

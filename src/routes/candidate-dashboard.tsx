@@ -45,6 +45,9 @@ const ProductCreatePage = lazy(() => import('src/pages/candidate-dashboard/produ
 const SocialFeedPage = lazy(() => import('src/pages/candidate-dashboard/social/feed'));
 const SocialProfilePage = lazy(() => import('src/pages/candidate-dashboard/social/profile'));
 
+// Profile
+const CandidateProfilePage = lazy(() => import('src/pages/candidate-dashboard/profile'));
+
 // Other
 const AccountPage = lazy(() => import('src/pages/candidate-dashboard/account'));
 const AnalyticsPage = lazy(() => import('src/pages/candidate-dashboard/analytics'));
@@ -71,6 +74,10 @@ export const candidateDashboardRoutes: RouteObject[] = [
       {
         index: true,
         element: <IndexPage />
+      },
+      {
+        path: 'profile',
+        element: <CandidateProfilePage />
       },
       {
         path: 'academy',

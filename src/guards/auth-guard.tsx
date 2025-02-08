@@ -16,35 +16,35 @@ interface AuthGuardProps {
 
 export const AuthGuard: FC<AuthGuardProps> = (props) => {
   const { children } = props;
-  const router = useRouter();
-  const { isAuthenticated, issuer } = useAuth();
-  const [checked, setChecked] = useState<boolean>(false);
+  // const router = useRouter();
+  // const { isAuthenticated, issuer } = useAuth();
+  // const [checked, setChecked] = useState<boolean>(false);
 
-  const check = useCallback(
-    () => {
-      if (!isAuthenticated) {
-        const searchParams = new URLSearchParams({ returnTo: window.location.pathname }).toString();
-        const href = loginPaths[issuer] + `?${searchParams}`;
-        router.replace(href);
-      } else {
-        setChecked(true);
-      }
-    },
-    [isAuthenticated, issuer, router]
-  );
+  // const check = useCallback(
+  //   () => {
+  //     if (!isAuthenticated) {
+  //       const searchParams = new URLSearchParams({ returnTo: window.location.pathname }).toString();
+  //       const href = loginPaths[issuer] + `?${searchParams}`;
+  //       router.replace(href);
+  //     } else {
+  //       setChecked(true);
+  //     }
+  //   },
+  //   [isAuthenticated, issuer, router]
+  // );
 
-  // Only check on mount, this allows us to redirect the user manually when auth state changes
-  useEffect(
-    () => {
-      check();
-    },
+  // // Only check on mount, this allows us to redirect the user manually when auth state changes
+  // useEffect(
+  //   () => {
+  //     check();
+  //   },
     
-    []
-  );
+  //   []
+  // );
 
-  if (!checked) {
-    return null;
-  }
+  // if (!checked) {
+  //   return null;
+  // }
 
   // If got here, it means that the redirect did not occur, and that tells us that the user is
   // authenticated / authorized.

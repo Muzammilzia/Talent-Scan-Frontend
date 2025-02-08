@@ -44,6 +44,8 @@
     "@reduxjs/toolkit": "1.9.5",
     "@stripe/react-stripe-js": "^2.3.2",
     "@stripe/stripe-js": "^2.1.11",
+    "@tanstack/react-query": "^5.62.8",
+    "@tanstack/react-query-devtools": "^5.62.8",
     "@untitled-ui/icons-react": "0.1.1",
     "apexcharts": "3.40.0",
     "axios": "^1.7.7",

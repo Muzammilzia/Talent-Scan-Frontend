@@ -2,6 +2,97 @@ import { subHours, subMinutes } from 'date-fns';
 import type { Connection, Post, Profile } from 'src/types/social';
 
 const now = new Date();
+[
+  {
+    "_id": "1a2b3c4d5e6f",
+    "fullName": "Muzzammil Zia",
+    "bio": "",
+    "about": "",
+    "address": "123 Maple Street, Springfield",
+    "age": "25",
+    "gender": "female",
+    "phone": "+1-555-123-4567",
+    "email": "muzzammil.zia@example.com",
+    "skills": ["Python", "ReactJS", "Machine Learning", "FastAPI", "MongoDB"],
+    "qualification": [
+      {
+        "institute": "Springfield University",
+        "program": "Bachelor of Computer Science",
+        "startDate": "2017-09-01",
+        "endDate": "2021-06-01",
+        "description": "Studied core computer science subjects with a focus on software development and AI."
+      },
+      {
+        "institute": "CodeAcademy Bootcamp",
+        "program": "Full Stack Development",
+        "startDate": "2022-01-01",
+        "endDate": "2022-06-01",
+        "description": "Learned full-stack development using ReactJS, Node.js, and MongoDB."
+      }
+    ],
+    "experience": [
+      {
+        "company/organization": "Tech Innovators",
+        "role": "Frontend Developer",
+        "startDate": "2021-07-01",
+        "endDate": "2023-08-01",
+        "description": "Developed user interfaces using ReactJS and optimized performance."
+      },
+      {
+        "company/organization": "AI Solutions Inc.",
+        "role": "Machine Learning Engineer",
+        "startDate": "2023-09-01",
+        "endDate": "2024-11-01",
+        "description": "Built and deployed machine learning models for recruitment systems."
+      }
+    ],
+    "socials": [
+      {
+        "linkedin": "https://linkedin.com/in/muzzammilzia"
+      }
+    ]
+  },
+  {
+    "_id": "7g8h9i0j1k2l",
+    "fullName": "John Doe",
+    "address": "456 Elm Avenue, Metropolis",
+    "age": "30",
+    "gender": "male",
+    "phone": "+1-555-987-6543",
+    "email": "john.doe@example.com",
+    "skills": ["JavaScript", "TypeScript", "Node.js", "ExpressJS", "PostgreSQL"],
+    "qualification": [
+      {
+        "institute": "Metropolis University",
+        "program": "Master of Information Technology",
+        "startDate": "2015-09-01",
+        "endDate": "2017-06-01",
+        "description": "Focused on backend development and database systems."
+      }
+    ],
+    "experience": [
+      {
+        "company/organization": "WebCraft Co.",
+        "role": "Backend Developer",
+        "startDate": "2018-01-01",
+        "endDate": "2021-12-31",
+        "description": "Developed REST APIs and managed relational databases."
+      },
+      {
+        "company/organization": "CodeHub Inc.",
+        "role": "Full Stack Developer",
+        "startDate": "2022-01-01",
+        "endDate": "2024-11-01",
+        "description": "Built and maintained web applications using JavaScript frameworks."
+      }
+    ],
+    "socials": [
+      {
+        "linkedin": "https://linkedin.com/in/johndoe"
+      }
+    ]
+  }
+]
 
 export const profile: Profile = {
   id: '5e86809283e28b96d2d38537',

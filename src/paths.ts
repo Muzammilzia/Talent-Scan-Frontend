@@ -98,6 +98,7 @@ export const paths = {
   },
   candidateDashboard: {
     index: "/candidate-dashboard",
+    profile: "/candidate-dashboard/profile",
     academy: {
       index: "/candidate-dashboard/academy",
       courseDetails: "/candidate-dashboard/academy/courses/:courseId",

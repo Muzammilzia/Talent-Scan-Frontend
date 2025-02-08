@@ -12,33 +12,33 @@ interface GuestGuardProps {
 
 export const GuestGuard: FC<GuestGuardProps> = (props) => {
   const { children } = props;
-  const { isAuthenticated } = useAuth();
-  const router = useRouter();
-  const [checked, setChecked] = useState<boolean>(false);
+  // const { isAuthenticated } = useAuth();
+  // const router = useRouter();
+  // const [checked, setChecked] = useState<boolean>(false);
 
-  const check = useCallback(
-    () => {
-      if (isAuthenticated) {
-        router.replace(paths.dashboard.index);
-      } else {
-        setChecked(true);
-      }
-    },
-    [isAuthenticated, router]
-  );
+  // const check = useCallback(
+  //   () => {
+  //     if (isAuthenticated) {
+  //       router.replace(paths.dashboard.index);
+  //     } else {
+  //       setChecked(true);
+  //     }
+  //   },
+  //   [isAuthenticated, router]
+  // );
 
-  // Only check on mount, this allows us to redirect the user manually when auth state changes
-  useEffect(
-    () => {
-      check();
-    },
+  // // Only check on mount, this allows us to redirect the user manually when auth state changes
+  // useEffect(
+  //   () => {
+  //     check();
+  //   },
     
-    []
-  );
+  //   []
+  // );
 
-  if (!checked) {
-    return null;
-  }
+  // if (!checked) {
+  //   return null;
+  // }
 
   // If got here, it means that the redirect did not occur, and that tells us that the user is
   // not authenticated / authorized.

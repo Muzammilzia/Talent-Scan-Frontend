@@ -20,12 +20,15 @@ import { useRouter } from "src/hooks/use-router";
 import { useMounted } from "src/hooks/use-mounted";
 import { useSearchParams } from "src/hooks/use-search-params";
 import { AuthContextType } from "src/contexts/auth/jwt-context";
+import { useCandidateSignup } from "src/hooks/auth/use-candidate-auth";
+import { FileDropzone } from "src/components/file-dropzone";
+import React from "react";
 
 interface Values {
   email: string;
   name: string;
   password: string;
-  policy: boolean;
+  // policy: boolean;
   submit: null;
 }
 
@@ -33,7 +36,7 @@ const initialValues: Values = {
   email: "",
   name: "",
   password: "",
-  policy: false,
+  // policy: false,
   submit: null,
 };
 
@@ -44,7 +47,7 @@ const validationSchema = Yup.object({
     .required("Email is required"),
   name: Yup.string().max(255).required("Name is required"),
   password: Yup.string().min(7).max(255).required("Password is required"),
-  policy: Yup.boolean().oneOf([true], "This field must be checked"),
+  // policy: Yup.boolean().oneOf([true], "This field must be checked"),
 });
 
 const Page = () => {
@@ -52,17 +55,25 @@ const Page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const returnTo = searchParams.get("returnTo");
-  const { signUp } = useAuth<AuthContextType>();
+  const [files, setFiles] = React.useState<File[]>([]);
+  const { mutate: signUp } = useCandidateSignup();
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values, helpers): Promise<void> => {
       try {
-        await signUp(values.email, values.name, values.password);
-
-        if (isMounted()) {
-          router.push(returnTo || paths.auth.candidate.login);
+        if (files.length === 0) {
+          helpers.setErrors({ submit: "Please upload a resume." });
+          return;
         }
+
+        const formData = new FormData();
+        formData.append("fullName", values.name);
+        formData.append("email", values.email);
+        formData.append("password", values.password);
+        formData.append("resume", files[0]);
+
+        signUp(formData);
       } catch (err) {
         console.error(err);
 
@@ -74,6 +85,23 @@ const Page = () => {
       }
     },
   });
+
+  const handleDrop = (acceptedFiles: File[]) => {
+    setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
+  };
+
+  const handleRemove = (fileToRemove: File) => {
+    setFiles((prevFiles) => prevFiles.filter((file) => file !== fileToRemove));
+  };
+
+  const handleRemoveAll = () => {
+    setFiles([]);
+  };
+
+  const handleUpload = () => {
+    // Implement the logic to upload the files
+    console.log('Uploading files:', files);
+  };
 
   return (
     <>
@@ -100,7 +128,12 @@ const Page = () => {
           <Typography variant="h5">Register</Typography>
           <Typography color="text.secondary" variant="body2">
             Already have an account? &nbsp;
-            <Link component={RouterLink} href={paths.auth.candidate.login} underline="hover" variant="subtitle2">
+            <Link
+              component={RouterLink}
+              href={paths.auth.candidate.login}
+              underline="hover"
+              variant="subtitle2"
+            >
               Log in
             </Link>
           </Typography>
@@ -139,8 +172,24 @@ const Page = () => {
               type="password"
               value={formik.values.password}
             />
+            <FileDropzone
+              files={files}
+              onRemove={handleRemove}
+              // onRemoveAll={handleRemoveAll}
+              // onUpload={handleUpload}
+              onDrop={(acceptedFiles) => handleDrop(acceptedFiles)}
+              caption="Upload your resume or CV. Accepted formats: PDF, DOC, DOCX."
+              accept={{
+                "application/pdf": [".pdf"],
+                "application/msword": [".doc"],
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+                  [".docx"],
+              }}
+              numberOfFilesAllowed={1}
+              maxSize={10485760} // 10 MB
+            />
           </Stack>
-          <Box
+          {/* <Box
             sx={{
               alignItems: "center",
               display: "flex",
@@ -159,10 +208,10 @@ const Page = () => {
                 Terms and Conditions
               </Link>
             </Typography>
-          </Box>
-          {!!(formik.touched.policy && formik.errors.policy) && (
+          </Box> */}
+          {/* {!!(formik.touched.policy && formik.errors.policy) && (
             <FormHelperText error>{formik.errors.policy}</FormHelperText>
-          )}
+          )} */}
           {formik.errors.submit && (
             <FormHelperText error sx={{ mt: 3 }}>
               {formik.errors.submit as string}

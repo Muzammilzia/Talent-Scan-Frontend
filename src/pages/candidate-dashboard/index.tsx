@@ -22,11 +22,13 @@ import { OverviewHelp } from 'src/sections/candidate-dashboard/overview/overview
 import { OverviewJobs } from 'src/sections/candidate-dashboard/overview/overview-jobs';
 import { OverviewOpenTickets } from 'src/sections/candidate-dashboard/overview/overview-open-tickets';
 import { OverviewTips } from 'src/sections/candidate-dashboard/overview/overview-tips';
+import { useCandidateMe } from 'src/hooks/auth/use-candidate-auth';
 
 const now = new Date();
 
 const Page = () => {
   const settings = useSettings();
+  const response = useCandidateMe()
 
   usePageView();
 

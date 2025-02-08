@@ -154,6 +154,7 @@ class AuthApi {
       }
     });
   }
+  
   meCompany(request: MeRequest): MeResponse {
     const { accessToken } = request;
 

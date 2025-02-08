@@ -65,6 +65,15 @@ export const useSections = () => {
               )
             },
             {
+              title: t(tokens.nav.profile),
+              path: paths.candidateDashboard.profile,
+              icon: (
+                <SvgIcon fontSize="small">
+                  <Users03Icon />
+                </SvgIcon>
+              )
+            },
+            {
               title: t(tokens.nav.analytics),
               path: paths.candidateDashboard.analytics,
               icon: (
