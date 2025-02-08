@@ -21,6 +21,7 @@ import { useMockedUser } from 'src/hooks/use-mocked-user';
 import { useRouter } from 'src/hooks/use-router';
 import { paths } from 'src/paths';
 import { Issuer } from 'src/utils/auth';
+import { useCandidateMe } from 'src/hooks/auth/use-candidate-auth';
 
 interface AccountPopoverProps {
   anchorEl: null | Element;
@@ -32,7 +33,7 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
   const { anchorEl, onClose, open, ...other } = props;
   const router = useRouter();
   const auth = useAuth();
-  const user = useMockedUser();
+  const { data } = useCandidateMe()
 
   const handleLogout = useCallback(
     async (): Promise<void> => {
@@ -74,7 +75,7 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
     >
       <Box sx={{ p: 2 }}>
         <Typography variant="body1">
-          {user.name}
+        {data?.candidate?.fullName}
         </Typography>
         <Typography
           color="text.secondary"
