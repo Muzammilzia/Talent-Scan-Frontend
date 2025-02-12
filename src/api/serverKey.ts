@@ -1,3 +1,4 @@
 export const serverKeys = {
-    candidateMe: "candidateMe"
+    candidateMe: "candidateMe",
+    companyMe: "companyMe"
 }

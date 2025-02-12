@@ -18,19 +18,22 @@ import { useRouter } from "src/hooks/use-router";
 import { useMounted } from "src/hooks/use-mounted";
 import { Seo } from "src/components/seo";
 import { paths } from "src/paths";
+import { useCompanySignup } from "src/hooks/auth/use-company-auth";
 
 interface Values {
   email: string;
   name: string;
   password: string;
-  policy: boolean;
+  // policy: boolean;
+  submit: null;
 }
 
 const initialValues: Values = {
   email: "",
   name: "",
   password: "",
-  policy: false,
+  // policy: false,
+  submit: null
 };
 
 const validationSchema = Yup.object({
@@ -40,28 +43,28 @@ const validationSchema = Yup.object({
     .required("Email is required"),
   name: Yup.string().max(255).required("Name is required"),
   password: Yup.string().min(7).max(255).required("Password is required"),
-  policy: Yup.boolean().oneOf([true], "This field must be checked"),
+  // policy: Yup.boolean().oneOf([true], "This field must be checked"),
 });
 
 const Page = () => {
-  const router = useRouter();
   const isMounted = useMounted();
-  const { signUpCompany } = useAuth<AuthContextType>();
+  const { mutate: signUp } = useCompanySignup();
 
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values, helpers) => {
       try {
-        await signUpCompany(values.email, values.name, values.password);
-        if (isMounted()) {
-          router.push("/auth/company/login"); // Redirect to login page
-        }
+        signUp({
+          email: values.email,
+          name: values.name,
+          password: values.password,
+        });
       } catch (err) {
         console.error(err);
         if (isMounted()) {
           helpers.setStatus({ success: false });
-          helpers.setErrors({ email: "An error occurred during registration" });
+          helpers.setErrors({ submit: err.message });
           helpers.setSubmitting(false);
         }
       }
@@ -72,23 +75,6 @@ const Page = () => {
     <>
       <Seo title="Register" />
       <div>
-        <Box sx={{ mb: 4 }}>
-          <Link
-            color="text.primary"
-            component={RouterLink}
-            href={paths.dashboard.index}
-            sx={{
-              alignItems: "center",
-              display: "inline-flex",
-            }}
-            underline="hover"
-          >
-            <SvgIcon sx={{ mr: 1 }}>
-              <ArrowLeftIcon />
-            </SvgIcon>
-            <Typography variant="subtitle2">Dashboard</Typography>
-          </Link>
-        </Box>
         <Stack sx={{ mb: 4 }} spacing={1}>
           <Typography variant="h5">Register</Typography>
           <Typography color="text.secondary" variant="body2">
@@ -138,7 +124,7 @@ const Page = () => {
               value={formik.values.password}
             />
           </Stack>
-          <Box
+          {/* <Box
             sx={{
               alignItems: "center",
               display: "flex",
@@ -157,9 +143,14 @@ const Page = () => {
                 Terms and Conditions
               </Link>
             </Typography>
-          </Box>
-          {!!(formik.touched.policy && formik.errors.policy) && (
+          </Box> */}
+          {/* {!!(formik.touched.policy && formik.errors.policy) && (
             <FormHelperText error>{formik.errors.policy}</FormHelperText>
+          )} */}
+          {formik.errors.submit && (
+            <FormHelperText error sx={{ mt: 3 }}>
+              {formik.errors.submit as string}
+            </FormHelperText>
           )}
           <Button
             fullWidth

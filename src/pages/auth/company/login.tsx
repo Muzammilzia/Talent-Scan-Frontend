@@ -1,4 +1,3 @@
-
 // IN USE, TEMPLATE FROM pages/auth-demo/login/modern.tsx
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -20,6 +19,7 @@ import { useMounted } from "src/hooks/use-mounted";
 import { useRouter } from "src/hooks/use-router";
 import { useSearchParams } from "src/hooks/use-search-params";
 import { FormHelperText } from "@mui/material";
+import { useCompanySignIn } from "src/hooks/auth/use-company-auth";
 
 interface Values {
   email: string;
@@ -46,17 +46,13 @@ const Page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const returnTo = searchParams.get("returnTo");
-  const { signInCompany} = useAuth<AuthContextType>();
+  const { mutate: signIn } = useCompanySignIn();
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values, helpers): Promise<void> => {
       try {
-        await signInCompany(values.email, values.password);
-
-        if (isMounted()) {
-          router.push(returnTo || paths.dashboard.index);
-        }
+        signIn({ email: values.email, password: values.password });
       } catch (err) {
         console.error(err);
 
@@ -94,7 +90,12 @@ const Page = () => {
           <Typography variant="h5">Log in</Typography>
           <Typography color="text.secondary" variant="body2">
             Don&apos;t have an account? &nbsp;
-            <Link component={RouterLink} href={paths.auth.company.register} underline="hover" variant="subtitle2">
+            <Link
+              component={RouterLink}
+              href={paths.auth.company.register}
+              underline="hover"
+              variant="subtitle2"
+            >
               Register
             </Link>
           </Typography>
@@ -139,11 +140,11 @@ const Page = () => {
           >
             Continue
           </Button>
-          <Box sx={{ mt: 3 }}>
+          {/* <Box sx={{ mt: 3 }}>
             <Link href="#" underline="hover" variant="subtitle2">
               Forgot password?
             </Link>
-          </Box>
+          </Box> */}
         </form>
       </div>
     </>
