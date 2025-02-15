@@ -6,7 +6,7 @@ import axios, {
 
 type UserType = "candidate" | "company";
 
-interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
+export interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   userType?: UserType; 
 }
 
