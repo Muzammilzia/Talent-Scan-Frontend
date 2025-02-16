@@ -24,11 +24,6 @@ const CustomerEditPage = lazy(() => import('src/pages/candidate-dashboard/custom
 const InvoiceListPage = lazy(() => import('src/pages/candidate-dashboard/invoices/list'));
 const InvoiceDetailPage = lazy(() => import('src/pages/candidate-dashboard/invoices/detail'));
 
-// Job
-const JobBrowsePage = lazy(() => import('src/pages/candidate-dashboard/jobs/browse'));
-const JobCreatePage = lazy(() => import('src/pages/candidate-dashboard/jobs/create'));
-const CompanyDetailPage = lazy(() => import('src/pages/candidate-dashboard/jobs/companies/detail'));
-
 // Logistics
 const LogisticsDashboardPage = lazy(() => import('src/pages/candidate-dashboard/logistics/dashboard'));
 const LogisticsFleetPage = lazy(() => import('src/pages/candidate-dashboard/logistics/fleet'));
@@ -151,28 +146,6 @@ export const candidateDashboardRoutes: RouteObject[] = [
           {
             path: ':invoiceId',
             element: <InvoiceDetailPage />
-          }
-        ]
-      },
-      {
-        path: 'jobs',
-        children: [
-          {
-            index: true,
-            element: <JobBrowsePage />
-          },
-          {
-            path: 'create',
-            element: <JobCreatePage />
-          },
-          {
-            path: 'companies',
-            children: [
-              {
-                path: ':companyId',
-                element: <CompanyDetailPage />
-              }
-            ]
           }
         ]
       },
