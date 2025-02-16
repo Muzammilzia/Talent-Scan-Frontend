@@ -20,6 +20,12 @@ const CustomerListPage = lazy(() => import('src/pages/company-dashboard/customer
 const CustomerDetailPage = lazy(() => import('src/pages/company-dashboard/customers/detail'));
 const CustomerEditPage = lazy(() => import('src/pages/company-dashboard/customers/edit'));
 
+// JobPosts
+const JobPostsCreatePage = lazy(() => import('src/pages/company-dashboard/job-posts/create'));
+const JobPostsListPage = lazy(() => import('src/pages/company-dashboard/job-posts/list'));
+const JobPostsDetailsPage = lazy(() => import('src/pages/company-dashboard/job-posts/detail'));
+const JobPostsEditPage = lazy(() => import('src/pages/company-dashboard/job-posts/edit'));
+
 // Invoice
 const InvoiceListPage = lazy(() => import('src/pages/company-dashboard/invoices/list'));
 const InvoiceDetailPage = lazy(() => import('src/pages/company-dashboard/invoices/detail'));
@@ -104,6 +110,27 @@ export const companyDashboardRoutes: RouteObject[] = [
           {
             path: ':postId',
             element: <BlogPostDetailPage />
+          }
+        ]
+      },
+      {
+        path: 'job-posts',
+        children: [
+          {
+            index: true,
+            element: <JobPostsListPage />
+          },
+          {
+            path: ':jobPostId',
+            element: <JobPostsDetailsPage />
+          },
+          {
+            path: 'create',
+            element: <JobPostsCreatePage /> 
+          },
+          {
+            path: 'edit/:jobPostId',
+            element: <JobPostsEditPage />
           }
         ]
       },

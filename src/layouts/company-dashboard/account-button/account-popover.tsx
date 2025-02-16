@@ -21,6 +21,8 @@ import { useMockedUser } from 'src/hooks/use-mocked-user';
 import { useRouter } from 'src/hooks/use-router';
 import { paths } from 'src/paths';
 import { Issuer } from 'src/utils/auth';
+import { useCompanyMe } from 'src/hooks/auth/use-company-auth';
+import { COMPANY_TOKEN_KEY } from 'src/api/axios';
 
 interface AccountPopoverProps {
   anchorEl: null | Element;
@@ -31,24 +33,16 @@ interface AccountPopoverProps {
 export const AccountPopover: FC<AccountPopoverProps> = (props) => {
   const { anchorEl, onClose, open, ...other } = props;
   const router = useRouter();
-  const auth = useAuth();
-  const user = useMockedUser();
+  const { data } = useCompanyMe()
+
+  console.log(data.company)
 
   const handleLogout = useCallback(
     async (): Promise<void> => {
       try {
         onClose?.();
 
-        switch (auth.issuer) {
-          case Issuer.JWT: {
-            await auth.signOut();
-            break;
-          }
-
-          default: {
-            console.warn('Using an unknown Auth Issuer, did not log out');
-          }
-        }
+        localStorage.removeItem(COMPANY_TOKEN_KEY)
 
         router.push(paths.index);
       } catch (err) {
@@ -56,7 +50,7 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
         toast.error('Something went wrong!');
       }
     },
-    [auth, router, onClose]
+    [router, onClose]
   );
 
   return (
@@ -74,13 +68,13 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
     >
       <Box sx={{ p: 2 }}>
         <Typography variant="body1">
-          {user.name}
+          {data?.company?.name}
         </Typography>
         <Typography
           color="text.secondary"
           variant="body2"
         >
-          demo@devias.io
+          {data?.company?.email}
         </Typography>
       </Box>
       <Divider />
@@ -108,7 +102,7 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
             )}
           />
         </ListItemButton>
-        <ListItemButton
+        {/* <ListItemButton
           component={RouterLink}
           href={paths.dashboard.account}
           onClick={onClose}
@@ -153,7 +147,7 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
               </Typography>
             )}
           />
-        </ListItemButton>
+        </ListItemButton> */}
       </Box>
       <Divider sx={{ my: '0 !important' }} />
       <Box

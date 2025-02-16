@@ -52,6 +52,9 @@ export const useGenericMutation = <T, S>({
       if(err.status === 500){
         toast.error("something went wrong")
       }
+      else {
+        toast.error(err.response?.data.detail)
+      }
     },
     // onError: (_err, _, context: { previousData?: S }) => {
 

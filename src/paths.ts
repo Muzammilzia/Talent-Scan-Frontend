@@ -169,6 +169,12 @@ export const paths = {
     calendar: "/company-dashboard/calendar",
     chat: "/company-dashboard/chat",
     crypto: "/company-dashboard/crypto",
+    jobPosts: {
+      index: "/company-dashboard/job-posts",
+      details: "/company-dashboard/job-posts",
+      edit: "/company-dashboard/job-posts/edit",
+      create: "/company-dashboard/job-posts/create",
+    },
     customers: {
       index: "/company-dashboard/customers",
       details: "/company-dashboard/customers/:customerId",

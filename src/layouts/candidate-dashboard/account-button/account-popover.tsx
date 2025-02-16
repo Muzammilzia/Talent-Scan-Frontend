@@ -22,6 +22,7 @@ import { useRouter } from 'src/hooks/use-router';
 import { paths } from 'src/paths';
 import { Issuer } from 'src/utils/auth';
 import { useCandidateMe } from 'src/hooks/auth/use-candidate-auth';
+import { CANDIDATE_TOKEN_KEY } from 'src/api/axios';
 
 interface AccountPopoverProps {
   anchorEl: null | Element;
@@ -40,16 +41,7 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
       try {
         onClose?.();
 
-        switch (auth.issuer) {
-          case Issuer.JWT: {
-            await auth.signOut();
-            break;
-          }
-
-          default: {
-            console.warn('Using an unknown Auth Issuer, did not log out');
-          }
-        }
+        localStorage.removeItem(CANDIDATE_TOKEN_KEY)
 
         router.push(paths.index);
       } catch (err) {
@@ -81,14 +73,14 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
           color="text.secondary"
           variant="body2"
         >
-          demo@devias.io
+          {data?.candidate?.email}
         </Typography>
       </Box>
       <Divider />
       <Box sx={{ p: 1 }}>
         <ListItemButton
           component={RouterLink}
-          href={paths.dashboard.social.profile}
+          href={paths.candidateDashboard.profile}
           onClick={onClose}
           sx={{
             borderRadius: 1,
@@ -109,7 +101,7 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
             )}
           />
         </ListItemButton>
-        <ListItemButton
+        {/* <ListItemButton
           component={RouterLink}
           href={paths.dashboard.account}
           onClick={onClose}
@@ -154,7 +146,7 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
               </Typography>
             )}
           />
-        </ListItemButton>
+        </ListItemButton> */}
       </Box>
       <Divider sx={{ my: '0 !important' }} />
       <Box

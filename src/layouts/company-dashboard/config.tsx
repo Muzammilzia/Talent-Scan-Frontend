@@ -106,7 +106,26 @@ export const useSections = () => {
                   <HomeSmileIcon />
                 </SvgIcon>
               )
-            }
+            },
+            {
+              title: 'Job Posts',
+              path: paths.companyDashboard.jobPosts.index,
+              icon: (
+                <SvgIcon fontSize="small">
+                  <Users03Icon />
+                </SvgIcon>
+              ),
+              items: [
+                {
+                  title: 'Create',
+                  path: paths.companyDashboard.jobPosts.create
+                },
+                {
+                  title: t(tokens.nav.list),
+                  path: paths.companyDashboard.jobPosts.index
+                }
+              ]
+            },
           ]
         },
         {
