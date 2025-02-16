@@ -44,6 +44,12 @@ const SocialProfilePage = lazy(() => import('src/pages/candidate-dashboard/socia
 const CandidateProfilePage = lazy(() => import('src/pages/candidate-dashboard/profile'));
 const CandidateProfileEditPage = lazy(() => import('src/pages/candidate-dashboard/profile/edit'));
 
+// jobs
+const JobListPage = lazy(() => import('src/pages/candidate-dashboard/jobs/list'));
+const JobRecommendedListPage = lazy(() => import('src/pages/candidate-dashboard/jobs/recommeneded'));
+const JobDetailsPage = lazy(() => import('src/pages/candidate-dashboard/jobs/detail'));
+
+
 // Other
 const AccountPage = lazy(() => import('src/pages/candidate-dashboard/account'));
 const AnalyticsPage = lazy(() => import('src/pages/candidate-dashboard/analytics'));
@@ -81,6 +87,23 @@ export const candidateDashboardRoutes: RouteObject[] = [
           {
             path: 'edit',
             element: <CandidateProfileEditPage />
+          }
+        ]
+      },
+      {
+        path: 'jobs',
+        children: [
+          {
+            index: true,
+            element: <JobListPage />
+          },
+          {
+            path: ':jobId',
+            element: <JobDetailsPage />
+          },
+          {
+            path: 'recommended',
+            element: <JobRecommendedListPage /> 
           }
         ]
       },

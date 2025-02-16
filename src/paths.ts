@@ -102,6 +102,11 @@ export const paths = {
       index: "/candidate-dashboard/profile",
       edit: "/candidate-dashboard/profile/edit",
     },
+    jobs: {
+      list: "/candidate-dashboard/jobs",
+      recommended: "/candidate-dashboard/jobs/recommended",
+      details: "/candidate-dashboard/jobs"
+    },
     academy: {
       index: "/candidate-dashboard/academy",
       courseDetails: "/candidate-dashboard/academy/courses/:courseId",

@@ -81,3 +81,18 @@ export const jobPostListGetById = async (jobId: string) => {
   } as CustomAxiosRequestConfig);
   return response.data;
 };
+
+export const jobPostListGetByIdForCandidate = async (jobId: string) => {
+  const response = await apiClient.get(`/job-post/${jobId}`);
+  return response.data;
+};
+
+export const jobPostListCandidate = async () => {
+    const response = await apiClient.get("/job-post/list");
+    return response.data;
+  };
+
+export const jobPostRecommendedListCandidate = async () => {
+    const response = await apiClient.get("/job-post/recommended_list");
+    return response.data;
+  };

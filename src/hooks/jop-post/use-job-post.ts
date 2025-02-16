@@ -4,7 +4,10 @@ import {
   JobPostEditRequest,
   jobPostList,
   jobPostListByCompanyId,
+  jobPostListCandidate,
   jobPostListGetById,
+  jobPostListGetByIdForCandidate,
+  jobPostRecommendedListCandidate,
 } from "src/api/job-post";
 import { useGenericMutation } from "../use-generic-mutation";
 import { useRouter } from "../use-router";
@@ -69,9 +72,26 @@ export const useJobPostListByCompany = (companyId: string) => {
 export const useJobPostListAll = () => {
   return useQuery({ queryFn: jobPostList, queryKey: [serverKeys.jobPostList] });
 };
+
+export const useJobPostListAllCandidate = () => {
+  return useQuery({ queryFn: jobPostListCandidate, queryKey: [serverKeys.jobPostListCandidate] });
+};
+
+// recommended list for candidate
+export const useJobPostRecommendedListAllCandidate = () => {
+  return useQuery({ queryFn: jobPostRecommendedListCandidate, queryKey: [serverKeys.jobPostRecommendedListCandidate] });
+};
+
 export const useJobPostGetById = (jobId: string) => {
   return useQuery({
     queryFn: () => jobPostListGetById(jobId),
+    queryKey: [serverKeys.jobPostGetById, jobId],
+  });
+};
+
+export const useJobPostGetByIdForCandidate = (jobId: string) => {
+  return useQuery({
+    queryFn: () => jobPostListGetByIdForCandidate(jobId),
     queryKey: [serverKeys.jobPostGetById, jobId],
   });
 };
