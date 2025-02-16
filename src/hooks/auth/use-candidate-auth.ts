@@ -1,5 +1,6 @@
 import {
   candidateMe,
+  candidateProfileEdit,
   candidateSignin,
   candidateSignup,
 } from "src/api/auth-candidate";
@@ -29,6 +30,18 @@ export const useCandidateSignIn = () => {
     onSuccess: (response) => {
       localStorage.setItem(CANDIDATE_TOKEN_KEY, response.data.token);
       router.push(paths.candidateDashboard.index)
+    },
+    queryKey: [serverKeys.candidateMe],
+  });
+};
+
+export const useCandidateProfileEdit = () => {
+  const router = useRouter();
+
+  return useGenericMutation({
+    serviceFunction: candidateProfileEdit,
+    onSuccess: (response) => {
+      router.push(paths.candidateDashboard.profile.index)
     },
     queryKey: [serverKeys.candidateMe],
   });

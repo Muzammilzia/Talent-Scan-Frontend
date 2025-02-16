@@ -47,6 +47,7 @@ const SocialProfilePage = lazy(() => import('src/pages/candidate-dashboard/socia
 
 // Profile
 const CandidateProfilePage = lazy(() => import('src/pages/candidate-dashboard/profile'));
+const CandidateProfileEditPage = lazy(() => import('src/pages/candidate-dashboard/profile/edit'));
 
 // Other
 const AccountPage = lazy(() => import('src/pages/candidate-dashboard/account'));
@@ -77,7 +78,16 @@ export const candidateDashboardRoutes: RouteObject[] = [
       },
       {
         path: 'profile',
-        element: <CandidateProfilePage />
+        children: [
+          {
+            index: true,
+            element: <CandidateProfilePage />
+          },
+          {
+            path: 'edit',
+            element: <CandidateProfileEditPage />
+          }
+        ]
       },
       {
         path: 'academy',

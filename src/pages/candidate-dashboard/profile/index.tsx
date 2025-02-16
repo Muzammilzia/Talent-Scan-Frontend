@@ -1,9 +1,13 @@
 import type { ChangeEvent } from "react";
 import { useCallback, useEffect, useState } from "react";
 import MessageChatSquareIcon from "@untitled-ui/icons-react/build/esm/MessageChatSquare";
+import EditIcon from "@untitled-ui/icons-react/build/esm/Edit01";
 import DotsHorizontalIcon from "@untitled-ui/icons-react/build/esm/DotsHorizontal";
 import Image01Icon from "@untitled-ui/icons-react/build/esm/Image01";
 import UserPlus02Icon from "@untitled-ui/icons-react/build/esm/UserPlus02";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -32,6 +36,7 @@ import { Card, CardActions, CardHeader } from "@mui/material";
 import { PropertyList } from "src/components/property-list";
 import { PropertyListItem } from "src/components/property-list-item";
 import { useCandidateMe } from "src/hooks/auth/use-candidate-auth";
+import { BACKEND_URL } from "src/api/axios";
 
 const useProfile = (): Profile | null => {
   const isMounted = useMounted();
@@ -102,8 +107,8 @@ const useConnections = (search: string = ""): Connection[] => {
 
 const Page = () => {
   const profile = useProfile();
-  const { data: data } = useCandidateMe()
-  console.log(data)
+  const { data: data } = useCandidateMe();
+  console.log(data);
   const [status, setStatus] = useState<string>("not_connected");
   const posts = usePosts();
   const [connectionsQuery, setConnectionsQuery] = useState<string>("");
@@ -161,7 +166,7 @@ const Page = () => {
                 },
               }}
             >
-              <Button
+              {/* <Button
                 startIcon={
                   <SvgIcon>
                     <Image01Icon />
@@ -188,7 +193,7 @@ const Page = () => {
                 variant="contained"
               >
                 Change Cover
-              </Button>
+              </Button> */}
             </Box>
             <Stack
               alignItems="center"
@@ -205,62 +210,52 @@ const Page = () => {
                   }}
                 />
                 <div>
+                  <Typography variant="h6">
+                    {data?.candidate?.fullName}
+                  </Typography>
                   <Typography color="text.secondary" variant="overline">
                     {data?.candidate?.bio}
                   </Typography>
-                  <Typography variant="h6">{data?.candidate?.fullName}</Typography>
                 </div>
+                {data?.candidate?.resume && (
+                  <Button
+                    component={"a"}
+                    href={`${BACKEND_URL}${data?.candidate?.resume}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    size="small"
+                    variant="contained"
+                  >
+                    Resume
+                  </Button>
+                )}
               </Stack>
               <Box sx={{ flexGrow: 1 }} />
-              {/* <Stack
+              <Stack
                 alignItems="center"
                 direction="row"
                 spacing={2}
                 sx={{
                   display: {
-                    md: 'block',
-                    xs: 'none'
-                  }
+                    md: "block",
+                    xs: "none",
+                  },
                 }}
               >
-                {showConnect && (
-                  <Button
-                    onClick={handleConnectionAdd}
-                    size="small"
-                    startIcon={(
-                      <SvgIcon>
-                        <UserPlus02Icon />
-                      </SvgIcon>
-                    )}
-                    variant="outlined"
-                  >
-                    Connect
-                  </Button>
-                )}
-                {showPending && (
-                  <Button
-                    color="primary"
-                    onClick={handleConnectionRemove}
-                    size="small"
-                    variant="outlined"
-                  >
-                    Pending
-                  </Button>
-                )}
                 <Button
                   component={RouterLink}
-                  href={paths.dashboard.chat}
+                  href={paths.candidateDashboard.profile.edit}
                   size="small"
-                  startIcon={(
+                  startIcon={
                     <SvgIcon>
-                      <MessageChatSquareIcon />
+                      <EditIcon />
                     </SvgIcon>
-                  )}
+                  }
                   variant="contained"
                 >
-                  Send Message
+                  Edit Profile
                 </Button>
-              </Stack> */}
+              </Stack>
               {/* <Tooltip title="More options">
                 <IconButton>
                   <SvgIcon>
@@ -273,54 +268,149 @@ const Page = () => {
           <Divider sx={{ mt: 3 }} />
           <Box sx={{ mt: 3 }}>
             <Grid container spacing={4}>
+              <Grid xs={12}>
+                <Card sx={{ display: "flex" }}>
+                  <CardHeader
+                    sx={{
+                      width: "fit-content",
+                      padding: "8px 8px 8px 24px !important",
+                    }}
+                    title="Social Profiles"
+                  />
+                  <CardActions sx={{ width: "fit-content" }}>
+                    <IconButton
+                      component={"a"}
+                      href={data?.candidate?.socials.facebook}
+                      target="_blank"
+                    >
+                      <SvgIcon>
+                        <FacebookIcon />
+                      </SvgIcon>
+                    </IconButton>
+                    <IconButton
+                      component={"a"}
+                      href={data?.candidate?.socials.github}
+                      target="_blank"
+                    >
+                      <SvgIcon>
+                        <GitHubIcon />
+                      </SvgIcon>
+                    </IconButton>
+                    <IconButton
+                      component={"a"}
+                      href={data?.candidate?.socials.linkedin}
+                      target="_blank"
+                    >
+                      <SvgIcon>
+                        <LinkedInIcon />
+                      </SvgIcon>
+                    </IconButton>
+                  </CardActions>
+                </Card>
+              </Grid>
               <Grid container xs={12} lg={4} spacing={4}>
                 <Grid xs={12}>
-                  <Card >
+                  <Card>
                     <CardHeader title="Basic Details" />
                     <PropertyList>
-                      <PropertyListItem divider label="Name" value={data?.candidate?.fullName || 'Not Provided'} />
-                      <PropertyListItem divider label="age" value={data?.candidate?.age || 'Not Provided'} />
-                      <PropertyListItem label="gender" value={data?.candidate?.gender || 'Not Provided'} />
+                      <PropertyListItem
+                        divider
+                        label="Name"
+                        value={data?.candidate?.fullName || "Not Provided"}
+                      />
+                      <PropertyListItem
+                        divider
+                        label="age"
+                        value={data?.candidate?.age || "Not Provided"}
+                      />
+                      <PropertyListItem
+                        label="gender"
+                        value={data?.candidate?.gender || "Not Provided"}
+                      />
                     </PropertyList>
                   </Card>
                 </Grid>
                 <Grid xs={12}>
-                  <Card >
+                  <Card>
                     <CardHeader title="Contact Information" />
                     <PropertyList>
-                      <PropertyListItem divider label="Phone" value={data?.candidate?.phone || 'Not Provided'} />
-                      <PropertyListItem divider label="Email" value={data?.candidate?.email || 'Not Provided'} />
-                      <PropertyListItem label="Address" value={data?.candidate?.address || 'Not Provided'} />
+                      <PropertyListItem
+                        divider
+                        label="Phone"
+                        value={data?.candidate?.phone || "Not Provided"}
+                      />
+                      <PropertyListItem
+                        divider
+                        label="Email"
+                        value={data?.candidate?.email || "Not Provided"}
+                      />
+                      <PropertyListItem
+                        label="Address"
+                        value={data?.candidate?.address || "Not Provided"}
+                      />
                     </PropertyList>
                   </Card>
                 </Grid>
               </Grid>
               <Grid container xs={12} lg={8} spacing={4}>
                 <Grid xs={12}>
-                  <Card >
+                  <Card>
                     <CardHeader title="Professional Summary" />
                     <PropertyList>
-                      <PropertyListItem label="About" value={data?.candidate?.about || 'Not Provided'} />
+                      <PropertyListItem
+                        label="About"
+                        value={data?.candidate?.about || "Not Provided"}
+                        divider
+                      />
+                      <PropertyListItem
+                        label="Skills"
+                        value={
+                          data?.candidate?.skills.join(", ") || "Not Provided"
+                        }
+                      />
                     </PropertyList>
                   </Card>
                 </Grid>
                 <Grid xs={12}>
-                  <Card >
+                  <Card>
                     <CardHeader title="Qualification" />
                     <PropertyList>
-                      <PropertyListItem divider label="Metropolis University" value={'Master of Information Technology (2015-09-01 - 2017-06-01)'} />
-                      <PropertyListItem divider label="Metropolis University" value={'Master of Information Technology (2015-09-01 - 2017-06-01)'} />
+                      <PropertyListItem
+                        divider
+                        label="Metropolis University"
+                        value={
+                          "Master of Information Technology (2015-09-01 - 2017-06-01)"
+                        }
+                      />
+                      <PropertyListItem
+                        divider
+                        label="Metropolis University"
+                        value={
+                          "Master of Information Technology (2015-09-01 - 2017-06-01)"
+                        }
+                      />
                     </PropertyList>
                   </Card>
                 </Grid>
               </Grid>
               <Grid container xs={12} lg={12}>
                 <Grid xs={12}>
-                  <Card >
+                  <Card>
                     <CardHeader title="Work Experience" />
                     <PropertyList>
-                      <PropertyListItem divider label="Metropolis University" value={'Master of Information Technology (2015-09-01 - 2017-06-01)'} />
-                      <PropertyListItem  label="Metropolis University" value={'Master of Information Technology (2015-09-01 - 2017-06-01)'} />
+                      <PropertyListItem
+                        divider
+                        label="Metropolis University"
+                        value={
+                          "Master of Information Technology (2015-09-01 - 2017-06-01)"
+                        }
+                      />
+                      <PropertyListItem
+                        label="Metropolis University"
+                        value={
+                          "Master of Information Technology (2015-09-01 - 2017-06-01)"
+                        }
+                      />
                     </PropertyList>
                   </Card>
                 </Grid>

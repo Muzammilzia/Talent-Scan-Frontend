@@ -107,23 +107,6 @@ const Page = () => {
     <>
       <Seo title="Register" />
       <div>
-        <Box sx={{ mb: 4 }}>
-          <Link
-            color="text.primary"
-            component={RouterLink}
-            href={paths.dashboard.index}
-            sx={{
-              alignItems: "center",
-              display: "inline-flex",
-            }}
-            underline="hover"
-          >
-            <SvgIcon sx={{ mr: 1 }}>
-              <ArrowLeftIcon />
-            </SvgIcon>
-            <Typography variant="subtitle2">Dashboard</Typography>
-          </Link>
-        </Box>
         <Stack sx={{ mb: 4 }} spacing={1}>
           <Typography variant="h5">Register</Typography>
           <Typography color="text.secondary" variant="body2">

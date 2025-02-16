@@ -35,8 +35,6 @@ export const AccountPopover: FC<AccountPopoverProps> = (props) => {
   const router = useRouter();
   const { data } = useCompanyMe()
 
-  console.log(data.company)
-
   const handleLogout = useCallback(
     async (): Promise<void> => {
       try {

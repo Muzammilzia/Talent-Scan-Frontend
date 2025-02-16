@@ -66,12 +66,22 @@ export const useSections = () => {
             },
             {
               title: t(tokens.nav.profile),
-              path: paths.candidateDashboard.profile,
+              path: paths.candidateDashboard.profile.index,
               icon: (
                 <SvgIcon fontSize="small">
                   <Users03Icon />
                 </SvgIcon>
-              )
+              ),
+              items: [
+                {
+                  title: t(tokens.nav.details),
+                  path: paths.candidateDashboard.profile.index
+                },
+                {
+                  title: t(tokens.nav.edit),
+                  path: paths.candidateDashboard.profile.edit
+                }
+              ]
             },
             {
               title: t(tokens.nav.analytics),
