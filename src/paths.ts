@@ -128,13 +128,13 @@ export const paths = {
       index: "/candidate-dashboard/invoices",
       details: "/candidate-dashboard/invoices/:orderId",
     },
-    jobs: {
-      index: "/candidate-dashboard/jobs",
-      create: "/candidate-dashboard/jobs/create",
-      companies: {
-        details: "/candidate-dashboard/jobs/companies/:companyId",
-      },
-    },
+    // jobs: {
+    //   index: "/candidate-dashboard/jobs",
+    //   create: "/candidate-dashboard/jobs/create",
+    //   companies: {
+    //     details: "/candidate-dashboard/jobs/companies/:companyId",
+    //   },
+    // },
     kanban: "/candidate-dashboard/kanban",
     logistics: {
       index: "/candidate-dashboard/logistics",

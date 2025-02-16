@@ -249,29 +249,29 @@ export const useSections = () => {
                 }
               ]
             },
-            {
-              title: t(tokens.nav.jobList),
-              path: paths.candidateDashboard.jobs.index,
-              icon: (
-                <SvgIcon fontSize="small">
-                  <Building04Icon />
-                </SvgIcon>
-              ),
-              items: [
-                {
-                  title: t(tokens.nav.browse),
-                  path: paths.candidateDashboard.jobs.index
-                },
-                {
-                  title: t(tokens.nav.details),
-                  path: paths.candidateDashboard.jobs.companies.details
-                },
-                {
-                  title: t(tokens.nav.create),
-                  path: paths.candidateDashboard.jobs.create
-                }
-              ]
-            },
+            // {
+            //   title: t(tokens.nav.jobList),
+            //   path: paths.candidateDashboard.jobs.index,
+            //   icon: (
+            //     <SvgIcon fontSize="small">
+            //       <Building04Icon />
+            //     </SvgIcon>
+            //   ),
+            //   items: [
+            //     {
+            //       title: t(tokens.nav.browse),
+            //       path: paths.candidateDashboard.jobs.index
+            //     },
+            //     {
+            //       title: t(tokens.nav.details),
+            //       path: paths.candidateDashboard.jobs.companies.details
+            //     },
+            //     {
+            //       title: t(tokens.nav.create),
+            //       path: paths.candidateDashboard.jobs.create
+            //     }
+            //   ]
+            // },
             {
               title: t(tokens.nav.socialMedia),
               path: paths.candidateDashboard.social.index,
