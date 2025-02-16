@@ -157,6 +157,10 @@ export const paths = {
   },
   companyDashboard: {
     index: "/company-dashboard",
+    profile: {
+      index: "/company-dashboard/profile",
+      edit: "/company-dashboard/profile/edit",
+    },
     academy: {
       index: "/company-dashboard/academy",
       courseDetails: "/company-dashboard/academy/courses/:courseId",

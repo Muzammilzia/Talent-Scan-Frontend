@@ -14,7 +14,7 @@ import { Seo } from "src/components/seo";
 import { useMounted } from "src/hooks/use-mounted";
 import { usePageView } from "src/hooks/use-page-view";
 import { paths } from "src/paths";
-import { CandidateProfileEditForm } from "src/sections/candidate-dashboard/profile/profile-edit-form";
+import { ProfileEditForm } from "src/sections/company-dashboard/profile/profile-edit-form";
 
 const Page = () => {
   usePageView();
@@ -36,7 +36,7 @@ const Page = () => {
                 <Link
                   color="text.primary"
                   component={RouterLink}
-                  href={paths.candidateDashboard.profile.index}
+                  href={paths.companyDashboard.profile.index}
                   sx={{
                     alignItems: "center",
                     display: "inline-flex",
@@ -50,7 +50,7 @@ const Page = () => {
                 </Link>
               </div>
             </Stack>
-            <CandidateProfileEditForm />
+            <ProfileEditForm />
           </Stack>
         </Container>
       </Box>

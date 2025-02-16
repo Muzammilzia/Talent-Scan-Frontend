@@ -36,6 +36,13 @@ export const companySignin = async (
   return response.data;
 };
 
+export const companyProfileEdit = async (data: any): Promise<any> => {
+  const response = await apiClient.post("/company/edit", data, {
+    userType: "company",
+  } as CustomAxiosRequestConfig);
+  return response.data;
+};
+
 export const companyMe = async () => {
   const response = await apiClient.get("/company/me", {
     userType: "company",

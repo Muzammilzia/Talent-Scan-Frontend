@@ -26,6 +26,10 @@ const JobPostsListPage = lazy(() => import('src/pages/company-dashboard/job-post
 const JobPostsDetailsPage = lazy(() => import('src/pages/company-dashboard/job-posts/detail'));
 const JobPostsEditPage = lazy(() => import('src/pages/company-dashboard/job-posts/edit'));
 
+// Company Profile
+const CompanyProfilePage = lazy(() => import('src/pages/company-dashboard/profile'));
+const CompanyProfileEditPage = lazy(() => import('src/pages/company-dashboard/profile/edit'));
+
 // Invoice
 const InvoiceListPage = lazy(() => import('src/pages/company-dashboard/invoices/list'));
 const InvoiceDetailPage = lazy(() => import('src/pages/company-dashboard/invoices/detail'));
@@ -77,6 +81,19 @@ export const companyDashboardRoutes: RouteObject[] = [
       {
         index: true,
         element: <IndexPage />
+      },
+      {
+        path: 'profile',
+        children: [
+          {
+            index: true,
+            element: <CompanyProfilePage />
+          },
+          {
+            path: 'edit',
+            element: <CompanyProfileEditPage />
+          }
+        ]
       },
       {
         path: 'academy',

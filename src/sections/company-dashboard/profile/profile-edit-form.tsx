@@ -25,7 +25,10 @@ import {
   useJobPostCreate,
   useJobPostEdit,
 } from "src/hooks/jop-post/use-job-post";
-import { useCompanyMe } from "src/hooks/auth/use-company-auth";
+import {
+  useCompanyMe,
+  useCompanyProfileEdit,
+} from "src/hooks/auth/use-company-auth";
 import {
   useCandidateMe,
   useCandidateProfileEdit,
@@ -56,99 +59,60 @@ interface ProfileEditFormProps {}
 export const ProfileEditForm: FC<ProfileEditFormProps> = (props) => {
   const { ...other } = props;
 
-  //   const { mutate: createJobPost } = useJobPostCreate();
-  const { mutate: candidateProfileEdit } = useCandidateProfileEdit();
-  const { data } = useCandidateMe();
-
-  const [files, setFiles] = useState<File[]>([]);
-  const [uploadNewFile, setUploadNewFile] = useState<boolean>(false);
-
-  const handleDrop = (acceptedFiles: File[]) => {
-    setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
-  };
-
-  const handleRemove = (fileToRemove: File) => {
-    setFiles((prevFiles) => prevFiles.filter((file) => file !== fileToRemove));
-  };
+  const { mutate: companyProfileEdit } = useCompanyProfileEdit();
+  const { data } = useCompanyMe();
 
   console.log(data);
 
   const formik = useFormik<{
-    fullName: string;
-    bio: string;
+    name: string;
+    totalEmployees: number;
     address: string;
-    age: string;
     about: string;
-    gender: string;
     phone: string;
-    skills: string;
     facebook: string;
     linkedin: string;
     github: string;
-    isAcceptingApplications: boolean;
     submit: null;
   }>({
     enableReinitialize: true,
     initialValues: {
-      fullName: data?.candidate?.fullName || "",
-      bio: data?.candidate?.bio || "",
-      address: data?.candidate?.address || "",
-      age: data?.candidate?.age || "",
-      about: data?.candidate?.about || "",
-      gender: data?.candidate?.gender || "",
-      phone: data?.candidate?.phone || "",
-      skills: data?.candidate?.skills?.join(", ") || "",
-      facebook: data?.candidate?.socials?.facebook || "",
-      linkedin: data?.candidate?.socials?.linkedin || "",
-      github: data?.candidate?.socials?.github || "",
-      isAcceptingApplications: true,
+      name: data?.company?.name || "",
+      totalEmployees: data?.company?.bio || 0,
+      address: data?.company?.address || "",
+      about: data?.company?.about || "",
+      phone: data?.company?.phone || "",
+      facebook: data?.company?.socials?.facebook || "",
+      linkedin: data?.company?.socials?.linkedin || "",
+      github: data?.company?.socials?.github || "",
       submit: null,
     },
     validationSchema: Yup.object({
-      fullName: Yup.string(),
-      bio: Yup.string(),
+      name: Yup.string(),
+      totalEmployees: Yup.number(),
       address: Yup.string(),
-      age: Yup.string(),
       about: Yup.string(),
-      gender: Yup.string(),
       phone: Yup.string(),
-      skills: Yup.string(),
       facebook: Yup.string().url(),
       linkedin: Yup.string().url(),
       github: Yup.string().url(),
-      isAcceptingApplications: Yup.bool(),
     }),
     onSubmit: async (values, helpers): Promise<void> => {
-      const formData = new FormData();
-      formData.append("fullName", values.fullName);
-      formData.append("bio", values.bio);
-      formData.append("address", values.address);
-      formData.append("age", values.age);
-      formData.append("about", values.about);
-      formData.append("gender", values.gender);
-      formData.append("phone", values.phone);
-      formData.append(
-        "skills",
-        JSON.stringify(
-          values.skills
-            ? values.skills.split(",").map((skill) => skill.trim())
-            : []
-        )
-      );
-      formData.append(
-        "socials",
-        JSON.stringify({
+      console.log(values);
+      const updatedData = {
+        name: values.name,
+        totalEmployees: values.totalEmployees,
+        address: values.address,
+        about: values.about,
+        phone: values.phone,
+        socials: {
           facebook: values.facebook,
           linkedin: values.linkedin,
           github: values.github,
-        })
-      );
-      if (files[0]) {
-        formData.append("resume", files[0]);
-      }
+        },
+      };
 
-      console.log(data);
-      candidateProfileEdit(formData);
+      companyProfileEdit(updatedData);
     },
   });
 
@@ -159,107 +123,32 @@ export const ProfileEditForm: FC<ProfileEditFormProps> = (props) => {
         <CardContent sx={{ pt: 0 }}>
           <Grid container spacing={3}>
             <Grid xs={12}>
-              {data?.candidate?.resume ? (
-                <>
-                  {uploadNewFile ? (
-                    <FileDropzone
-                      files={files}
-                      onRemove={handleRemove}
-                      // onRemoveAll={handleRemoveAll}
-                      // onUpload={handleUpload}
-                      onDrop={(acceptedFiles) => handleDrop(acceptedFiles)}
-                      caption="Upload your resume or CV. Accepted formats: PDF, DOC, DOCX."
-                      accept={{
-                        "application/pdf": [".pdf"],
-                        "application/msword": [".doc"],
-                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                          [".docx"],
-                      }}
-                      numberOfFilesAllowed={1}
-                      maxSize={10485760} // 10 MB
-                    />
-                  ) : (
-                    <Stack
-                      alignItems="center"
-                      direction="row"
-                      spacing={2}
-                      sx={{
-                        display: {
-                          md: "block",
-                          xs: "none",
-                        },
-                      }}
-                    >
-                      <Button
-                        component={"a"}
-                        href={data?.candidate?.resume}
-                        target="_blank"
-                        size="small"
-                        startIcon={
-                          <SvgIcon>
-                            <FileIcon />
-                          </SvgIcon>
-                        }
-                        variant="contained"
-                      >
-                        See Resume
-                      </Button>
-                      <Button
-                        size="small"
-                        onClick={() => setUploadNewFile(true)}
-                        startIcon={
-                          <SvgIcon>
-                            <UploadIcon />
-                          </SvgIcon>
-                        }
-                        variant="contained"
-                      >
-                        Upload New Resume
-                      </Button>
-                    </Stack>
-                  )}
-                </>
-              ) : (
-                <FileDropzone
-                  files={files}
-                  onRemove={handleRemove}
-                  // onRemoveAll={handleRemoveAll}
-                  // onUpload={handleUpload}
-                  onDrop={(acceptedFiles) => handleDrop(acceptedFiles)}
-                  caption="Upload your resume or CV. Accepted formats: PDF, DOC, DOCX."
-                  accept={{
-                    "application/pdf": [".pdf"],
-                    "application/msword": [".doc"],
-                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                      [".docx"],
-                  }}
-                  numberOfFilesAllowed={1}
-                  maxSize={10485760} // 10 MB
-                />
-              )}
-            </Grid>
-            <Grid xs={12}>
               <TextField
-                error={!!(formik.touched.fullName && formik.errors.fullName)}
+                error={!!(formik.touched.name && formik.errors.name)}
                 fullWidth
                 label="Full Name"
-                name="role"
+                name="name"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 required
-                value={formik.values.fullName}
+                value={formik.values.name}
               />
             </Grid>
             <Grid xs={12} md={6}>
               <TextField
-                error={!!(formik.touched.bio && formik.errors.bio)}
+                error={
+                  !!(
+                    formik.touched.totalEmployees &&
+                    formik.errors.totalEmployees
+                  )
+                }
                 fullWidth
-                label="Bio"
-                placeholder="Full Stack Developer"
-                name="bio"
+                label="Total Employees / Company Size"
+                name="totalEmployees"
+                type="number"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
-                value={formik.values.bio}
+                value={formik.values.totalEmployees}
               />
             </Grid>
             <Grid xs={12} md={6}>
@@ -275,35 +164,6 @@ export const ProfileEditForm: FC<ProfileEditFormProps> = (props) => {
             </Grid>
             <Grid xs={12} md={6}>
               <TextField
-                error={!!(formik.touched.age && formik.errors.age)}
-                fullWidth
-                label="Age"
-                name="age"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.age}
-              />
-            </Grid>
-            <Grid xs={12} md={6}>
-              <TextField
-                error={!!(formik.touched.gender && formik.errors.gender)}
-                fullWidth
-                label="Gender"
-                name="gender"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                select
-                value={formik.values.gender}
-              >
-                {genderOptions.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid xs={12} md={6}>
-              <TextField
                 error={!!(formik.touched.phone && formik.errors.phone)}
                 fullWidth
                 label="Phone"
@@ -311,17 +171,6 @@ export const ProfileEditForm: FC<ProfileEditFormProps> = (props) => {
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik.values.phone}
-              />
-            </Grid>
-            <Grid xs={12} md={6}>
-              <TextField
-                error={!!(formik.touched.skills && formik.errors.skills)}
-                fullWidth
-                label="Skills (Comma Separated)"
-                name="skills"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.skills}
               />
             </Grid>
             <Grid xs={12} md={6}>
@@ -374,7 +223,7 @@ export const ProfileEditForm: FC<ProfileEditFormProps> = (props) => {
                       ? "red"
                       : "#2970FF",
                 }}
-                name="description"
+                name="about"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik.values.about}
@@ -385,67 +234,7 @@ export const ProfileEditForm: FC<ProfileEditFormProps> = (props) => {
                 </Typography>
               )}
             </Grid>
-
-            {/* <Grid xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="description"
-                name="description"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.description}
-              />
-            </Grid> */}
           </Grid>
-          <Stack divider={<Divider />} spacing={3} sx={{ mt: 3 }}>
-            <Stack
-              alignItems="center"
-              direction="row"
-              justifyContent="flex-start"
-              spacing={3}
-            >
-              <Stack spacing={1}>
-                <Typography gutterBottom variant="subtitle1">
-                  Accepting Applications
-                </Typography>
-                <Typography color="text.secondary" variant="body2">
-                  Disable this if you are no longer accepting applications
-                </Typography>
-              </Stack>
-              <Switch
-                checked={formik.values.isAcceptingApplications}
-                color="primary"
-                edge="start"
-                name="isAcceptingApplications"
-                onChange={formik.handleChange}
-                value={formik.values.isAcceptingApplications}
-              />
-            </Stack>
-            {/* <Stack
-              alignItems="center"
-              direction="row"
-              justifyContent="space-between"
-              spacing={3}
-            >
-              <Stack spacing={1}>
-                <Typography gutterBottom variant="subtitle1">
-                  Available to hire
-                </Typography>
-                <Typography color="text.secondary" variant="body2">
-                  Toggling this will let your teammates know that you are
-                  available for acquiring new projects
-                </Typography>
-              </Stack>
-              <Switch
-                checked={formik.values.hasDiscount}
-                color="primary"
-                edge="start"
-                name="hasDiscount"
-                onChange={formik.handleChange}
-                value={formik.values.hasDiscount}
-              />
-            </Stack> */}
-          </Stack>
         </CardContent>
         <Stack
           direction={{
