@@ -1,4 +1,6 @@
 import {
+  candidateById,
+  candidateList,
   candidateMe,
   candidateProfileEdit,
   candidateSignin,
@@ -50,3 +52,11 @@ export const useCandidateProfileEdit = () => {
 export const useCandidateMe = () => {
   return useQuery({ queryFn: candidateMe, queryKey: [serverKeys.candidateMe] });
 };
+
+export const useCandidateById = (id: string) => {
+  return useQuery({ queryFn: () => candidateById(id), queryKey: [serverKeys.candidateById, `${id}-candidate-details`] });
+};
+
+export const useCandidateList = () => {
+  return useQuery({ queryFn: candidateList, queryKey: [serverKeys.candidateList] });
+}

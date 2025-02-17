@@ -26,6 +26,10 @@ const JobPostsListPage = lazy(() => import('src/pages/company-dashboard/job-post
 const JobPostsDetailsPage = lazy(() => import('src/pages/company-dashboard/job-posts/detail'));
 const JobPostsEditPage = lazy(() => import('src/pages/company-dashboard/job-posts/edit'));
 
+// candidates
+const CandidatesListPage = lazy(() => import('src/pages/company-dashboard/candidates/list'))
+const CandidatesDetailsPage = lazy(() => import('src/pages/company-dashboard/candidates/detail'))
+
 // Company Profile
 const CompanyProfilePage = lazy(() => import('src/pages/company-dashboard/profile'));
 const CompanyProfileEditPage = lazy(() => import('src/pages/company-dashboard/profile/edit'));
@@ -128,6 +132,19 @@ export const companyDashboardRoutes: RouteObject[] = [
             path: ':postId',
             element: <BlogPostDetailPage />
           }
+        ]
+      },
+      {
+        path: 'candidates',
+        children: [
+          {
+            index: true,
+            element: <CandidatesListPage />
+          },
+          {
+            path: ':candidateId',
+            element: <CandidatesDetailsPage />
+          },
         ]
       },
       {

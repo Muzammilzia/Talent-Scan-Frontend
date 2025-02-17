@@ -9,4 +9,8 @@ export const serverKeys = {
     jobApplicationListByCandidate: "jobApplicationListByCandidate",
     jobApplicationListByCompany: "jobApplicationListByCompany",
     jobApplicationListByJob: "jobApplicationListByJob",
+    candidateList: "candidateList",
+    candidateById: "candidateById",
+    companyById: "companyById",
+    companyList: "companyList",
 }

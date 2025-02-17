@@ -1,4 +1,4 @@
-import { companyMe, companyProfileEdit, companySignin, companySignup } from "src/api/auth-company";
+import { companyById, companyList, companyMe, companyProfileEdit, companySignin, companySignup } from "src/api/auth-company";
 import { useGenericMutation } from "../use-generic-mutation";
 import { useRouter } from "../use-router";
 import { paths } from "src/paths";
@@ -45,3 +45,11 @@ export const useCompanyProfileEdit = () => {
 export const useCompanyMe = () => {
   return useQuery({ queryFn: companyMe, queryKey: [serverKeys.companyMe] });
 };
+
+export const useCompanyById = (id: string) => {
+  return useQuery({ queryFn: () => companyById(id), queryKey: [serverKeys.companyById, `${id}-company-details`] });
+};
+
+export const useCompanyList = () => {
+  return useQuery({ queryFn: companyList, queryKey: [serverKeys.companyList] });
+}

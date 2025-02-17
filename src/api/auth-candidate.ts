@@ -1,4 +1,4 @@
-import apiClient from "./axios";
+import apiClient, { CustomAxiosRequestConfig } from "./axios";
 
 export interface CandidateSignUpRequest {
     fullName: string
@@ -65,5 +65,19 @@ export const candidateProfileEdit = async (data: FormData): Promise<any> => {
 
 export const candidateMe = async () => {
     const response = await apiClient.get("/candidate/me");
+    return response.data;
+}
+
+export const candidateList = async () => {
+    const response = await apiClient.get("/candidate/list", {
+        userType: "company",
+      } as CustomAxiosRequestConfig);
+    return response.data;
+}
+
+export const candidateById = async (id: string) => {
+    const response = await apiClient.get(`/candidate/${id}`, {
+        userType: "company",
+      } as CustomAxiosRequestConfig);
     return response.data;
 }

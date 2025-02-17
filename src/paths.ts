@@ -107,6 +107,10 @@ export const paths = {
       recommended: "/candidate-dashboard/jobs/recommended",
       details: "/candidate-dashboard/jobs"
     },
+    company: {
+      list: "/candidate-dashboard/companies",
+      details: "/candidate-dashboard/companies",
+    },
     academy: {
       index: "/candidate-dashboard/academy",
       courseDetails: "/candidate-dashboard/academy/courses/:courseId",
@@ -186,6 +190,10 @@ export const paths = {
       details: "/company-dashboard/job-posts",
       edit: "/company-dashboard/job-posts/edit",
       create: "/company-dashboard/job-posts/create",
+    },
+    candidate: {
+      list: "/company-dashboard/candidates",
+      details: "/company-dashboard/candidates",
     },
     customers: {
       index: "/company-dashboard/customers",

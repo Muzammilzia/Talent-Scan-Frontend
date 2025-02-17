@@ -49,6 +49,9 @@ const JobListPage = lazy(() => import('src/pages/candidate-dashboard/jobs/list')
 const JobRecommendedListPage = lazy(() => import('src/pages/candidate-dashboard/jobs/recommeneded'));
 const JobDetailsPage = lazy(() => import('src/pages/candidate-dashboard/jobs/detail'));
 
+// companies
+const CompanyListPage = lazy(() => import('src/pages/candidate-dashboard/companies/list'));
+const CompanyDetailsPage = lazy(() => import('src/pages/candidate-dashboard/companies/detail'));
 
 // Other
 const AccountPage = lazy(() => import('src/pages/candidate-dashboard/account'));
@@ -100,6 +103,23 @@ export const candidateDashboardRoutes: RouteObject[] = [
           {
             path: ':jobId',
             element: <JobDetailsPage />
+          },
+          {
+            path: 'recommended',
+            element: <JobRecommendedListPage /> 
+          }
+        ]
+      },
+      {
+        path: 'companies',
+        children: [
+          {
+            index: true,
+            element: <CompanyListPage />
+          },
+          {
+            path: ':companyId',
+            element: <CompanyDetailsPage />
           },
           {
             path: 'recommended',

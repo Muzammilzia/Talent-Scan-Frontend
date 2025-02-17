@@ -49,3 +49,13 @@ export const companyMe = async () => {
   } as CustomAxiosRequestConfig);
   return response.data;
 };
+
+export const companyList = async () => {
+    const response = await apiClient.get("/company/list");
+    return response.data;
+}
+
+export const companyById = async (id: string) => {
+    const response = await apiClient.get(`/company/${id}`);
+    return response.data;
+}
