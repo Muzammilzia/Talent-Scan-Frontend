@@ -11,9 +11,7 @@ import CheckoutPage from "src/pages/checkout";
 import PricingPage from "src/pages/pricing";
 
 import { authRoutes } from "./auth";
-import { authDemoRoutes } from "./auth-demo";
 import { componentsRoutes } from "./components";
-import { dashboardRoutes } from "./dashboard";
 import { candidateDashboardRoutes } from "./candidate-dashboard";
 import { companyDashboardRoutes } from "./company-dashboard";
 import { Elements } from "@stripe/react-stripe-js";
@@ -53,8 +51,6 @@ export const routes: RouteObject[] = [
     ],
   },
   ...authRoutes,
-  ...authDemoRoutes,
-  ...dashboardRoutes,
   ...candidateDashboardRoutes,
   ...companyDashboardRoutes,
   {

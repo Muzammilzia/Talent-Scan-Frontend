@@ -28,8 +28,6 @@ import { Seo } from "src/components/seo";
 import { useMounted } from "src/hooks/use-mounted";
 import { usePageView } from "src/hooks/use-page-view";
 import { paths } from "src/paths";
-import { SocialConnections } from "src/sections/candidate-dashboard/social/social-connections";
-import { SocialTimeline } from "src/sections/candidate-dashboard/social/social-timeline";
 import type { Connection, Post, Profile } from "src/types/social";
 import Grid from "@mui/system/Unstable_Grid";
 import { Card, CardActions, CardHeader } from "@mui/material";

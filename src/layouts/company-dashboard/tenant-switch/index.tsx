@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import { usePopover } from 'src/hooks/use-popover';
 
 import { TenantPopover } from './tenant-popover';
+import { useCompanyMe } from 'src/hooks/auth/use-company-auth';
 
 const tenants: string[] = ['Devias', 'Acme Corp'];
 
@@ -19,7 +20,7 @@ interface TenantSwitchProps {
 }
 
 export const TenantSwitch: FC<TenantSwitchProps> = (props) => {
-  const popover = usePopover<HTMLButtonElement>();
+  const { data } = useCompanyMe()
 
   return (
     <>
@@ -34,31 +35,16 @@ export const TenantSwitch: FC<TenantSwitchProps> = (props) => {
             color="inherit"
             variant="h6"
           >
-            Devias
+            Talent Scan
           </Typography>
           <Typography
             color="neutral.400"
             variant="body2"
           >
-            Production
+            {data?.company?.name}
           </Typography>
         </Box>
-        <IconButton
-          onClick={popover.handleOpen}
-          ref={popover.anchorRef}
-        >
-          <SvgIcon sx={{ fontSize: 16 }}>
-            <ChevronDownIcon />
-          </SvgIcon>
-        </IconButton>
       </Stack>
-      <TenantPopover
-        anchorEl={popover.anchorRef.current}
-        onChange={popover.handleClose}
-        onClose={popover.handleClose}
-        open={popover.open}
-        tenants={tenants}
-      />
     </>
   );
 };

@@ -16,6 +16,8 @@ export const Layout: FC<LayoutProps> = withAuthGuard((props) => {
   const settings = useSettings();
   const sections = useSections();
 
+  console.log(settings.layout)
+
   if (settings.layout === 'horizontal') {
     return (
       <HorizontalLayout
