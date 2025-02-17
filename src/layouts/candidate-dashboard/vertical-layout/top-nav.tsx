@@ -44,14 +44,14 @@ export const TopNav: FC<TopNavProps> = (props) => {
       <Stack
         alignItems="center"
         direction="row"
-        justifyContent="space-between"
+        justifyContent="flex-end"
         spacing={2}
         sx={{
           minHeight: TOP_NAV_HEIGHT,
           px: 2
         }}
       >
-        <Stack
+        {/* <Stack
           alignItems="center"
           direction="row"
           spacing={2}
@@ -64,7 +64,7 @@ export const TopNav: FC<TopNavProps> = (props) => {
             </IconButton>
           )}
           <SearchButton />
-        </Stack>
+        </Stack> */}
         <Stack
           alignItems="center"
           direction="row"

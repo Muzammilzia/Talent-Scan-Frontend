@@ -20,7 +20,6 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import { blueGrey } from "@mui/material/colors";
 
 import { socialApi } from "src/api/social";
 import { RouterLink } from "src/components/router-link";
@@ -28,7 +27,7 @@ import { Seo } from "src/components/seo";
 import { useMounted } from "src/hooks/use-mounted";
 import { usePageView } from "src/hooks/use-page-view";
 import { paths } from "src/paths";
-import type { Connection, Post, Profile } from "src/types/social";
+import type { Profile } from "src/types/social";
 import Grid from "@mui/system/Unstable_Grid";
 import { Card, CardActions, CardHeader } from "@mui/material";
 import { PropertyList } from "src/components/property-list";
@@ -60,82 +59,16 @@ const useProfile = (): Profile | null => {
   return profile;
 };
 
-const usePosts = (): Post[] => {
-  const isMounted = useMounted();
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  const handlePostsGet = useCallback(async () => {
-    try {
-      const response = await socialApi.getPosts();
-
-      if (isMounted()) {
-        setPosts(response);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }, [isMounted]);
-
-  useEffect(() => {
-    handlePostsGet();
-  }, []);
-
-  return posts;
-};
-
-const useConnections = (search: string = ""): Connection[] => {
-  const [connections, setConnections] = useState<Connection[]>([]);
-  const isMounted = useMounted();
-
-  const handleConnectionsGet = useCallback(async () => {
-    const response = await socialApi.getConnections();
-
-    if (isMounted()) {
-      setConnections(response);
-    }
-  }, [isMounted]);
-
-  useEffect(() => {
-    handleConnectionsGet();
-  }, [search]);
-
-  return connections.filter((connection) => {
-    return connection.name?.toLowerCase().includes(search);
-  });
-};
-
 const Page = () => {
   const profile = useProfile();
   const { data: data } = useCompanyMe();
   console.log(data);
-  const [status, setStatus] = useState<string>("not_connected");
-  const posts = usePosts();
-  const [connectionsQuery, setConnectionsQuery] = useState<string>("");
-  const connections = useConnections(connectionsQuery);
 
   usePageView();
-
-  const handleConnectionAdd = useCallback((): void => {
-    setStatus("pending");
-  }, []);
-
-  const handleConnectionRemove = useCallback((): void => {
-    setStatus("not_connected");
-  }, []);
-
-  const handleConnectionsQueryChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>): void => {
-      setConnectionsQuery(event.target.value);
-    },
-    []
-  );
 
   if (!profile) {
     return null;
   }
-
-  const showConnect = status === "not_connected";
-  const showPending = status === "pending";
 
   return (
     <>

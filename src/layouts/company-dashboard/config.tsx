@@ -85,7 +85,7 @@ export const useSections = () => {
             },
             {
               title: "Candidates",
-              path: paths.companyDashboard.profile.index,
+              path: paths.companyDashboard.candidate.list,
               icon: (
                 <SvgIcon fontSize="small">
                   <Users03Icon />

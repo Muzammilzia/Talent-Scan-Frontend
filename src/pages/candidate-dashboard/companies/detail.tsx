@@ -28,7 +28,7 @@ import { Seo } from "src/components/seo";
 import { useMounted } from "src/hooks/use-mounted";
 import { usePageView } from "src/hooks/use-page-view";
 import { paths } from "src/paths";
-import type { Connection, Post, Profile } from "src/types/social";
+import type { Profile } from "src/types/social";
 import Grid from "@mui/system/Unstable_Grid";
 import { Card, CardActions, CardHeader } from "@mui/material";
 import { PropertyList } from "src/components/property-list";
@@ -59,50 +59,6 @@ const useProfile = (): Profile | null => {
   }, []);
 
   return profile;
-};
-
-const usePosts = (): Post[] => {
-  const isMounted = useMounted();
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  const handlePostsGet = useCallback(async () => {
-    try {
-      const response = await socialApi.getPosts();
-
-      if (isMounted()) {
-        setPosts(response);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }, [isMounted]);
-
-  useEffect(() => {
-    handlePostsGet();
-  }, []);
-
-  return posts;
-};
-
-const useConnections = (search: string = ""): Connection[] => {
-  const [connections, setConnections] = useState<Connection[]>([]);
-  const isMounted = useMounted();
-
-  const handleConnectionsGet = useCallback(async () => {
-    const response = await socialApi.getConnections();
-
-    if (isMounted()) {
-      setConnections(response);
-    }
-  }, [isMounted]);
-
-  useEffect(() => {
-    handleConnectionsGet();
-  }, [search]);
-
-  return connections.filter((connection) => {
-    return connection.name?.toLowerCase().includes(search);
-  });
 };
 
 const Page = () => {
@@ -201,38 +157,6 @@ const Page = () => {
                 </div>
               </Stack>
               <Box sx={{ flexGrow: 1 }} />
-              <Stack
-                alignItems="center"
-                direction="row"
-                spacing={2}
-                sx={{
-                  display: {
-                    md: "block",
-                    xs: "none",
-                  },
-                }}
-              >
-                <Button
-                  component={RouterLink}
-                  href={paths.companyDashboard.profile.edit}
-                  size="small"
-                  startIcon={
-                    <SvgIcon>
-                      <EditIcon />
-                    </SvgIcon>
-                  }
-                  variant="contained"
-                >
-                  Edit Profile
-                </Button>
-              </Stack>
-              {/* <Tooltip title="More options">
-                <IconButton>
-                  <SvgIcon>
-                    <DotsHorizontalIcon />
-                  </SvgIcon>
-                </IconButton>
-              </Tooltip> */}
             </Stack>
           </div>
           <Divider sx={{ mt: 3 }} />

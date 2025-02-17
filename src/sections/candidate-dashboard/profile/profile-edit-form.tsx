@@ -385,67 +385,7 @@ export const CandidateProfileEditForm: FC<ProfileEditFormProps> = (props) => {
                 </Typography>
               )}
             </Grid>
-
-            {/* <Grid xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="description"
-                name="description"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.description}
-              />
-            </Grid> */}
           </Grid>
-          <Stack divider={<Divider />} spacing={3} sx={{ mt: 3 }}>
-            <Stack
-              alignItems="center"
-              direction="row"
-              justifyContent="flex-start"
-              spacing={3}
-            >
-              <Stack spacing={1}>
-                <Typography gutterBottom variant="subtitle1">
-                  Accepting Applications
-                </Typography>
-                <Typography color="text.secondary" variant="body2">
-                  Disable this if you are no longer accepting applications
-                </Typography>
-              </Stack>
-              <Switch
-                checked={formik.values.isAcceptingApplications}
-                color="primary"
-                edge="start"
-                name="isAcceptingApplications"
-                onChange={formik.handleChange}
-                value={formik.values.isAcceptingApplications}
-              />
-            </Stack>
-            {/* <Stack
-              alignItems="center"
-              direction="row"
-              justifyContent="space-between"
-              spacing={3}
-            >
-              <Stack spacing={1}>
-                <Typography gutterBottom variant="subtitle1">
-                  Available to hire
-                </Typography>
-                <Typography color="text.secondary" variant="body2">
-                  Toggling this will let your teammates know that you are
-                  available for acquiring new projects
-                </Typography>
-              </Stack>
-              <Switch
-                checked={formik.values.hasDiscount}
-                color="primary"
-                edge="start"
-                name="hasDiscount"
-                onChange={formik.handleChange}
-                value={formik.values.hasDiscount}
-              />
-            </Stack> */}
-          </Stack>
         </CardContent>
         <Stack
           direction={{
