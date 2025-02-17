@@ -1,5 +1,5 @@
 import type { ChangeEvent } from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import ArrowLeftIcon from "@untitled-ui/icons-react/build/esm/ArrowLeft";
 import ChevronDownIcon from "@untitled-ui/icons-react/build/esm/ChevronDown";
 import Edit02Icon from "@untitled-ui/icons-react/build/esm/Edit02";
@@ -36,17 +36,48 @@ import { getInitials } from "src/utils/get-initials";
 import { useJobPostGetByIdForCandidate } from "src/hooks/jop-post/use-job-post";
 import { JobBasicDetails } from "src/sections/company-dashboard/job-posts/job-basic-details";
 import { JobDescription } from "src/sections/company-dashboard/job-posts/job-description";
+import { useCandidateMe } from "src/hooks/auth/use-candidate-auth";
+import {
+  useJobApplicationApply,
+  useJobApplicationsByCandidate,
+} from "src/hooks/job-application/use-job-application";
+import toast from "react-hot-toast";
 
 const Page = () => {
-
   const { jobId } = useParams();
-  console.log(jobId);
 
   if (!jobId) {
     return null;
   }
-
   const { data: job } = useJobPostGetByIdForCandidate(jobId);
+  const { data: candidateResponse } = useCandidateMe();
+
+  const { mutate: applyToJob } = useJobApplicationApply();
+
+  const { data: userApplicationsRes } = useJobApplicationsByCandidate(
+    candidateResponse?.candidate?._id
+  );
+  const appliedJobs = useMemo(() => {
+    if (userApplicationsRes?.data) {
+      return userApplicationsRes?.data?.map((item: any) => item.job);
+    }
+    return [];
+  }, [userApplicationsRes]);
+
+  console.log(appliedJobs)
+
+  const apply = () => {
+    console.log(job._id, job?.company, candidateResponse?.candidate?._id)
+    if (job?._id && job?.company && candidateResponse?.candidate?._id) {
+      applyToJob({
+        job: job?._id,
+        candidate: candidateResponse?.candidate._id,
+        company: job?.company,
+      });
+    } else {
+      toast.error("Error occured, pls try again later");
+    }
+  };
 
   usePageView();
 
@@ -95,21 +126,26 @@ const Page = () => {
               >
                 <Stack alignItems="center" direction="row" spacing={2}>
                   <Stack spacing={1}>
-                    <Typography variant="h4">{job.role}</Typography>
+                    <Typography variant="h4">{job?.role}</Typography>
                     {/* <Stack alignItems="center" direction="row" spacing={1}>
                       <Typography variant="subtitle2">user_id:</Typography>
                       <Chip label={customer.id} size="small" />
                     </Stack> */}
                   </Stack>
                 </Stack>
-                <Stack alignItems="center" direction="row" spacing={2}>
-                  <Button
-                    variant="contained"
-                    onClick={() => {}}
-                  >
-                    Apply to this Job
-                  </Button>
-                </Stack>
+                {appliedJobs.includes(job?._id) ? (
+                  <Stack alignItems="center" direction="row" spacing={2}>
+                    <Button variant="contained" onClick={() => {}}>
+                      Already Applied
+                    </Button>
+                  </Stack>
+                ) : (
+                  <Stack alignItems="center" direction="row" spacing={2}>
+                    <Button variant="contained" onClick={apply}>
+                      Apply to this Job
+                    </Button>
+                  </Stack>
+                )}
               </Stack>
             </Stack>
             <div>

@@ -22,6 +22,7 @@ import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/components/router-link";
 import { Scrollbar } from "src/components/scrollbar";
 import { paths } from "src/paths";
+import { Chip } from "@mui/material";
 
 interface JobListTableProps {
   count?: number;
@@ -33,6 +34,7 @@ interface JobListTableProps {
   onRowsPerPageChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   page?: number;
   rowsPerPage?: number;
+  appliedJobs?: any[];
 }
 
 export const JobListTable: FC<JobListTableProps> = (props) => {
@@ -43,6 +45,7 @@ export const JobListTable: FC<JobListTableProps> = (props) => {
     onRowsPerPageChange,
     page = 0,
     rowsPerPage = 0,
+    appliedJobs,
   } = props;
 
   return (
@@ -61,9 +64,10 @@ export const JobListTable: FC<JobListTableProps> = (props) => {
           </TableHead>
           <TableBody>
             {items.map((item) => {
+              const applied = appliedJobs?.includes(item._id);
 
               return (
-                <TableRow hover key={item._id} >
+                <TableRow hover key={item._id}>
                   <TableCell>{item?.role}</TableCell>
                   <TableCell>{item?.company?.name}</TableCell>
                   <TableCell>{`${item?.minimumSalary} - ${item?.maximumSalary}`}</TableCell>
@@ -76,6 +80,20 @@ export const JobListTable: FC<JobListTableProps> = (props) => {
                     </Typography>
                   </TableCell>
                   <TableCell align="right">
+                    {applied && (
+                      <Chip
+                        label="Applied"
+                        variant="outlined"
+                        color="success"
+                        sx={{
+                          borderColor: "green",
+                          backgroundColor: "rgba(76, 175, 80, 0.1)", // Light green background
+                          color: "green",
+                          fontWeight: "bold",
+                          mr: 1, // Right margin
+                        }}
+                      />
+                    )}
                     <IconButton
                       component={RouterLink}
                       href={`${paths.candidateDashboard.jobs.details}/${item._id}`}

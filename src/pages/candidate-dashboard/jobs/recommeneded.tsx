@@ -19,6 +19,7 @@ import { useJobPostListAllCandidate, useJobPostRecommendedListAllCandidate } fro
 import { JobsListSearch } from "src/sections/candidate-dashboard/jobs/job-post-list-search";
 import { JobListTable } from "src/sections/candidate-dashboard/jobs/job-post-list-table";
 import { useCandidateMe } from "src/hooks/auth/use-candidate-auth";
+import { useJobApplicationsByCandidate } from "src/hooks/job-application/use-job-application";
 
 interface Filters {
   query?: string;
@@ -98,9 +99,16 @@ const useJobsIds = (jobs: any[] = []) => {
 
 const Page = () => {
   const search = useSearch();
-  const { data: candidateResponse } = useCandidateMe();
   const { data } = useJobPostRecommendedListAllCandidate();
-  console.log(data)
+  
+  const { data: candidateResponse } = useCandidateMe();
+  const { data: userApplicationsRes } = useJobApplicationsByCandidate(candidateResponse?.candidate?._id)
+  const appliedJobs = useMemo(() => {
+    if(userApplicationsRes?.data){
+      return userApplicationsRes?.data?.map((item: any) => item.job)
+    }
+    return []
+  }, [userApplicationsRes])
 
   const [filteredJobs, setFilteredJobs] = useState<any[]>(data?.jobs || []);
 
@@ -157,6 +165,7 @@ const Page = () => {
                 onRowsPerPageChange={search.handleRowsPerPageChange}
                 page={search.state.page}
                 rowsPerPage={search.state.rowsPerPage}
+                appliedJobs={appliedJobs}
               />
             </Card>
           </Stack>
