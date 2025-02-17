@@ -187,6 +187,7 @@ export const paths = {
     crypto: "/company-dashboard/crypto",
     jobPosts: {
       index: "/company-dashboard/job-posts",
+      applications: "/company-dashboard/job-posts/applications",
       details: "/company-dashboard/job-posts",
       edit: "/company-dashboard/job-posts/edit",
       create: "/company-dashboard/job-posts/create",

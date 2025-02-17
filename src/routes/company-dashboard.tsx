@@ -23,6 +23,7 @@ const CustomerEditPage = lazy(() => import('src/pages/company-dashboard/customer
 // JobPosts
 const JobPostsCreatePage = lazy(() => import('src/pages/company-dashboard/job-posts/create'));
 const JobPostsListPage = lazy(() => import('src/pages/company-dashboard/job-posts/list'));
+const ApplicationsListPage = lazy(() => import('src/pages/company-dashboard/job-posts/applications'));
 const JobPostsDetailsPage = lazy(() => import('src/pages/company-dashboard/job-posts/detail'));
 const JobPostsEditPage = lazy(() => import('src/pages/company-dashboard/job-posts/edit'));
 
@@ -153,6 +154,10 @@ export const companyDashboardRoutes: RouteObject[] = [
           {
             index: true,
             element: <JobPostsListPage />
+          },
+          {
+            path: 'applications/:jobPostId',
+            element: <ApplicationsListPage />
           },
           {
             path: ':jobPostId',

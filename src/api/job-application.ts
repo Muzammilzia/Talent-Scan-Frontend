@@ -1,4 +1,4 @@
-import apiClient from "./axios";
+import apiClient, { CustomAxiosRequestConfig } from "./axios";
 
 export interface JobApplicationApplyRequest {
   company: string;
@@ -29,9 +29,11 @@ export const jobApplicationListByCompany = async (
   return response.data;
 };
 
-export const jobApplicationListByJob = async (
+export const jobApplicationListByCompanyAndJob = async (
   id: string
 ): Promise<any> => {
-  const response = await apiClient.get(`/job-application/get-by-job/${id}`);
+  const response = await apiClient.get(`/job-application/get-by-company-and-job/${id}`, {
+    userType: "company",
+  } as CustomAxiosRequestConfig);
   return response.data;
 };

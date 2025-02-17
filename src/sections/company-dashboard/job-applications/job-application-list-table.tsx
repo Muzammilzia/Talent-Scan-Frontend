@@ -23,7 +23,7 @@ import { RouterLink } from "src/components/router-link";
 import { Scrollbar } from "src/components/scrollbar";
 import { paths } from "src/paths";
 
-interface JobListTableProps {
+interface JobApplicationListTableProps {
   count?: number;
   items?: any[];
   onDeselectAll?: () => void;
@@ -40,7 +40,9 @@ interface JobListTableProps {
   selected?: string[];
 }
 
-export const JobListTable: FC<JobListTableProps> = (props) => {
+export const JobApplicationListTable: FC<JobApplicationListTableProps> = (
+  props
+) => {
   const {
     count = 0,
     items = [],
@@ -115,12 +117,11 @@ export const JobListTable: FC<JobListTableProps> = (props) => {
                   }}
                 />
               </TableCell>
-              <TableCell>Role</TableCell>
-              <TableCell>Salary Range</TableCell>
-              <TableCell>Job Type</TableCell>
-              <TableCell>Paying Currency</TableCell>
-              <TableCell>View Applications</TableCell>
-              <TableCell align="right">Actions</TableCell>
+              <TableCell>Candidate</TableCell>
+              <TableCell>Candidate's Email</TableCell>
+              <TableCell>Job</TableCell>
+              <TableCell>AI Score</TableCell>
+              <TableCell align="center">View</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -146,26 +147,33 @@ export const JobListTable: FC<JobListTableProps> = (props) => {
                       value={isSelected}
                     />
                   </TableCell>
-                  <TableCell>{item?.role}</TableCell>
-                  <TableCell>{`${item?.minimumSalary} - ${item?.maximumSalary}`}</TableCell>
+                  <TableCell>{item?.candidate?.fullName}</TableCell>
+                  <TableCell>{item?.candidate?.email}</TableCell>
                   <TableCell sx={{ textTransform: "capitalize" }}>
-                    {item?.jobType}
+                    {item?.job?.role}
                   </TableCell>
                   <TableCell>
-                    <Typography variant="subtitle2">
-                      {item?.payingCurrency}
-                    </Typography>
+                    <Typography variant="subtitle2">{item?.AIScore}</Typography>
                   </TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      component={RouterLink}
-                      href={`${paths.companyDashboard.jobPosts.applications}/${item._id}`}
-                    >
-                      View
-                    </Button>
+                  <TableCell align="center">
+                    <Stack direction={'row'} justifyContent={'center'} spacing={2}>
+                      <Button
+                        variant="contained"
+                        component={RouterLink}
+                        href={`${paths.companyDashboard.candidate.details}/${item?.candidate?._id}`}
+                      >
+                        Candidate
+                      </Button>
+                      <Button
+                        variant="contained"
+                        component={RouterLink}
+                        href={`${paths.companyDashboard.jobPosts.details}/${item?.job?._id}`}
+                      >
+                        Job
+                      </Button>
+                    </Stack>
                   </TableCell>
-                  <TableCell align="right">
+                  {/* <TableCell align="right">
                     <IconButton
                       component={RouterLink}
                       href={`${paths.companyDashboard.jobPosts.edit}/${item._id}`}
@@ -182,7 +190,7 @@ export const JobListTable: FC<JobListTableProps> = (props) => {
                         <ArrowRightIcon />
                       </SvgIcon>
                     </IconButton>
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               );
             })}
@@ -202,7 +210,7 @@ export const JobListTable: FC<JobListTableProps> = (props) => {
   );
 };
 
-JobListTable.propTypes = {
+JobApplicationListTable.propTypes = {
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,

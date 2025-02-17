@@ -157,7 +157,7 @@ export const useSections = () => {
                 {
                   title: t(tokens.nav.list),
                   path: paths.companyDashboard.jobPosts.index
-                }
+                },
               ]
             },
           ]

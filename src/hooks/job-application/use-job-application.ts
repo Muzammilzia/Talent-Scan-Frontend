@@ -19,7 +19,7 @@ import {
   jobApplicationApply,
   jobApplicationListByCandidate,
   jobApplicationListByCompany,
-  jobApplicationListByJob,
+  jobApplicationListByCompanyAndJob,
 } from "src/api/job-application";
 
 export const useJobApplicationApply = () => {
@@ -53,21 +53,11 @@ export const useJobApplicationsByCandidate = (candidateId: string) => {
   });
 };
 
-export const useJobApplicationsByCompany = (companyId: string) => {
+export const useJobApplicationsByCompanyAndJob = (jobId: string) => {
   return useQuery({
-    queryFn: () => jobApplicationListByCompany(companyId),
+    queryFn: () => jobApplicationListByCompanyAndJob(jobId),
     queryKey: [
-      serverKeys.jobApplicationListByCompany,
-      `${companyId}-company-applications`,
-    ],
-  });
-};
-
-export const useJobApplicationsByJob = (jobId: string) => {
-  return useQuery({
-    queryFn: () => jobApplicationListByJob(jobId),
-    queryKey: [
-      serverKeys.jobApplicationListByCompany,
+      serverKeys.jobApplicationListByCompanyAndJob,
       `${jobId}-job-applications`,
     ],
   });
