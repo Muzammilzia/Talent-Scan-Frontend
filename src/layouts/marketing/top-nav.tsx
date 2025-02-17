@@ -34,8 +34,12 @@ const items: Item[] = [
     path: paths.contact
   },
   {
-    title: 'Login',
+    title: 'Candidate Login',
     path: paths.auth.candidate.login,
+  },
+  {
+    title: 'Company Login',
+    path: paths.auth.company.login,
   }
 ];
 
@@ -49,6 +53,7 @@ export const TopNav: FC<TopNavProps> = (props) => {
   const { onMobileNavOpen } = props;
   const pathname = usePathname();
   const mdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
+  const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
   const [elevate, setElevate] = useState<boolean>(false);
   const offset = 64;
   const delay = 100;
@@ -196,16 +201,24 @@ export const TopNav: FC<TopNavProps> = (props) => {
             alignItems="center"
             direction="row"
             justifyContent="flex-end"
-            spacing={2}
+            spacing={1}
             sx={{ flexGrow: 1 }}
           >
             <Button
               component={RouterLink}
-              size={mdUp ? 'medium' : 'small'}
+              size={lgUp ? 'medium' : 'small'}
+              href={paths.auth.company.register}
+              variant="contained"
+            >
+              Register as Company
+            </Button>
+            <Button
+              component={RouterLink}
+              size={lgUp ? 'medium' : 'small'}
               href={paths.auth.candidate.register}
               variant="contained"
             >
-              Instant Access
+              Register as Candidate
             </Button>
             {!mdUp && (
               <IconButton onClick={onMobileNavOpen}>

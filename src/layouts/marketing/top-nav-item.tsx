@@ -64,7 +64,7 @@ export const TopNavItem: FC<TopNavItemProps> = (props) => {
               borderRadius: 1,
               display: 'flex',
               justifyContent: 'flex-start',
-              px: '16px',
+              px: '8px',
               py: '8px',
               textAlign: 'left',
               '&:hover': {

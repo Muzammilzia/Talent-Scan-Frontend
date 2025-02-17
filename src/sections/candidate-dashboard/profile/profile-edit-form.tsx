@@ -467,7 +467,7 @@ export const CandidateProfileEditForm: FC<ProfileEditFormProps> = (props) => {
             color="inherit"
             component={RouterLink}
             disabled={formik.isSubmitting}
-            href={paths.dashboard.customers.details}
+            href={paths.candidateDashboard.profile.index}
           >
             Cancel
           </Button>

@@ -306,7 +306,7 @@ export const JobPostCreateForm: FC<JobPostCreateFormProps> = (props) => {
             color="inherit"
             component={RouterLink}
             disabled={formik.isSubmitting}
-            href={paths.dashboard.customers.details}
+            href={paths.companyDashboard.jobPosts.index}
           >
             Cancel
           </Button>

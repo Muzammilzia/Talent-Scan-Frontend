@@ -29,11 +29,11 @@ interface Item {
 
 const items: Item[] = [
   {
-    title: 'Sign up',
-    path: paths.auth.candidate.register
+    title: 'Company Login',
+    path: paths.auth.company.login
   },
   {
-    title: 'Login',
+    title: 'Candidate Login',
     path: paths.auth.candidate.login
   },
   {
